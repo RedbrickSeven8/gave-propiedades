@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gave Propiedades | Tu confianza, nuestra prioridad en el mercado inmobiliario</title>
+    <meta name="description" content="En Gave Propiedades asesoramos y acompañamos en la compra y venta de propiedades en Colombia con un enfoque profesional, cercano y generando confianza.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body class="antialiased font-sans text-gray-800 bg-gray-50 overflow-x-hidden w-full max-w-[100vw]">
+    <!-- Navbar -->
+    <header class="fixed top-0 w-full z-[9990] transition-all duration-300 bg-white shadow-md py-2" id="navbar">
+      <div class="container mx-auto px-4 md:px-8">
+        <div class="flex items-center justify-between h-20 md:h-24">
+          <a href="/index.html" class="flex items-center gap-2 z-50">
+            <img src="/logo.png" alt="Gave Propiedades Logo" class="h-16 md:h-24 w-auto object-contain transition-transform duration-300 hover:scale-105">
+          </a>
+          
+          <nav class="hidden md:flex items-center space-x-8">
+            <a href="/index.html" class="text-gave-primary hover:text-gave-secondary transition-colors font-medium nav-link">Inicio</a>
+            <a href="#nosotros" class="text-gave-primary hover:text-gave-secondary transition-colors font-medium nav-link">Nosotros</a>
+            <a href="#servicios" class="text-gave-primary hover:text-gave-secondary transition-colors font-medium nav-link">Servicios</a>
+            <a href="/catalog.html" class="text-gave-primary hover:text-gave-secondary transition-colors font-medium nav-link">Propiedades</a>
+            <a href="https://wa.me/573183593507?text=Hola,%20quiero%20agendar%20una%20asesor%C3%ADa" target="_blank" class="px-6 py-2.5 bg-gave-secondary text-white font-medium rounded-full hover:bg-opacity-90 transition-all transform hover:-translate-y-0.5 shadow-lg">Contactar</a>
+          </nav>
+          
+          <button id="mobile-menu-btn" class="md:hidden flex items-center justify-center p-3 rounded-lg border transition-colors bg-gray-100 border-gray-200 text-gave-primary z-[9999]" aria-label="Toggle Menu">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+          </button>
+        </div>
+      </div>
+      
+      <div class="fixed inset-0 bg-gave-primary z-[9995] transform translate-x-full transition-transform duration-300 ease-in-out md:hidden flex flex-col items-center justify-center space-y-8" id="mobile-menu">
+        <a href="/index.html" class="text-2xl text-white font-medium mobile-link">Inicio</a>
+        <a href="#nosotros" class="text-2xl text-white font-medium mobile-link">Nosotros</a>
+        <a href="#servicios" class="text-2xl text-white font-medium mobile-link">Servicios</a>
+        <a href="/catalog.html" class="text-2xl text-white font-medium mobile-link">Propiedades</a>
+        <a href="https://wa.me/573183593507?text=Hola,%20quiero%20agendar%20una%20asesor%C3%ADa" target="_blank" class="text-2xl text-gave-secondary font-medium mobile-link">Contactar</a>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center hero-bg overflow-hidden">
+      <div class="absolute inset-0 bg-gave-primary/40"></div>
+      
+      <div class="container mx-auto px-4 md:px-8 relative z-10 pt-24">
+        <div class="max-w-3xl mx-auto text-center space-y-8 animate-on-load">
+          <span class="inline-block px-4 py-1.5 rounded-full bg-white/20 backdrop-blur-sm text-white text-sm font-medium tracking-wider uppercase mb-2">
+            Mercado Inmobiliario en Colombia
+          </span>
+          <h1 class="text-4xl md:text-5xl lg:text-7xl font-bold text-white leading-tight text-balance">
+            Tu confianza, nuestra mayor propiedad
+          </h1>
+          <p class="text-lg md:text-xl text-gray-100 max-w-2xl mx-auto text-balance font-light">
+            Asesoramos y acompañamos en la compra, venta y promoción de tus inmuebles con la transparencia y el conocimiento legal que mereces.
+          </p>
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-8">
+            <a href="https://wa.me/573183593507?text=Hola,%20quiero%20agendar%20una%20asesor%C3%ADa" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto px-8 py-4 bg-gave-secondary text-white font-semibold rounded-full hover:bg-opacity-90 transition-all flex items-center justify-center gap-2 group shadow-xl">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:scale-110 transition-transform"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
+              Agenda una asesoría
+            </a>
+            <a href="#servicios" class="w-full sm:w-auto px-8 py-4 bg-white/10 backdrop-blur-md text-white font-semibold rounded-full border border-white/30 hover:bg-white/20 transition-all flex items-center justify-center">
+              Conoce nuestros servicios
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scroll Indicator -->
+      <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce">
+        <span class="text-white/70 text-sm font-medium uppercase tracking-widest">Descubrir</span>
+        <i data-lucide="chevron-down" class="text-white w-6 h-6"></i>
+      </div>
+    </section>
+
+    <!-- Sobre Nosotros / Diferenciador -->
+    <section id="nosotros" class="py-24 bg-white relative">
+      <div class="container mx-auto px-4 md:px-8">
+        <div class="flex flex-col lg:flex-row items-center gap-16">
+          <div class="lg:w-1/2 space-y-8 gs-reveal">
+            <div class="inline-flex items-center gap-2 text-gave-secondary font-semibold uppercase tracking-wider">
+              <span class="w-8 h-0.5 bg-gave-secondary"></span>
+              Sobre Gave Propiedades
+            </div>
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gave-primary leading-tight">
+              Más que agentes, somos tus aliadas estratégicas
+            </h2>
+            <p class="text-gray-600 text-lg leading-relaxed">
+              Entendemos que comprar o vender una propiedad es una de las decisiones financieras más importantes de tu vida. Por eso, no solo conectamos compradores con vendedores; brindamos un acompañamiento integral.
+            </p>
+            <div class="space-y-4">
+              <div class="flex items-start gap-4">
+                <div class="mt-1 bg-gave-primary/10 p-2 rounded-lg text-gave-primary">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg>
+                </div>
+                <div>
+                  <h3 class="text-xl font-semibold text-gray-900 mb-1">Acompañamiento Legal y Estructural</h3>
+                  <p class="text-gray-600">Conocimiento profundo de las normativas vigentes para garantizar transacciones seguras y transparentes.</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-4">
+                <div class="mt-1 bg-gave-secondary/10 p-2 rounded-lg text-gave-secondary">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="m9 12 2 2 4-4"/></svg>
+                </div>
+                <div>
+                  <h3 class="text-xl font-semibold text-gray-900 mb-1">Confianza Comprobada</h3>
+                  <p class="text-gray-600">Nuestro mayor aval es la tranquilidad de clientes corporativos y consumidores finales que ya han confiado en nosotras.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="lg:w-1/2 relative gs-reveal">
+            <div class="absolute -inset-4 bg-gradient-to-tr from-gave-primary/20 to-gave-secondary/20 rounded-2xl transform rotate-3"></div>
+            
+    <!-- CAROUSEL START -->
+    <style>
+      .my-custom-carousel {
+        position: relative;
+        width: 100%;
+        height: 500px;
+        perspective: 1000px;
+        border-radius: 1rem;
+        overflow: hidden;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      }
+      .my-custom-carousel img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0;
+        transform: scale(0.8) translateY(-5%);
+        transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s ease-in-out;
+        z-index: 1;
+      }
+      .my-custom-carousel img.active {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+        z-index: 2;
+      }
+    </style>
+    
+            
+            <div class="relative w-full rounded-2xl shadow-2xl overflow-hidden bg-gray-200">
+              <div id="asesoras-carousel" class="native-carousel w-full h-[350px] md:h-[500px]">
+                <div class="native-carousel-item relative h-full">
+                  <img src="/img-asesora-1.png" alt="Asesora 1" class="w-full h-full object-cover">
+                </div>
+                <div class="native-carousel-item relative h-full">
+                  <img src="/img-asesora-2.png" alt="Asesora 2" class="w-full h-full object-cover">
+                </div>
+              </div>
+            </div>
+            
+            <!-- Experience Badge -->
+
+            <div class="absolute -bottom-6 -left-6 bg-white p-6 rounded-xl shadow-xl flex items-center gap-4">
+              <div class="text-gave-secondary">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-10 h-10"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+              </div>
+              <div>
+                <p class="text-3xl font-bold text-gave-primary">100%</p>
+                <p class="text-sm text-gray-500 font-medium uppercase tracking-wide">Transparencia</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Servicios -->
+    <section id="servicios" class="py-24 bg-gray-50 relative overflow-hidden">
+      <div class="container mx-auto px-4 md:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-16 gs-reveal">
+          <div class="inline-flex items-center gap-2 text-gave-secondary font-semibold uppercase tracking-wider justify-center w-full mb-4">
+            <span class="w-8 h-0.5 bg-gave-secondary"></span>
+            Soluciones Integrales
+            <span class="w-8 h-0.5 bg-gave-secondary"></span>
+          </div>
+          <h2 class="text-3xl md:text-4xl font-bold text-gave-primary mb-6">Nuestros Servicios Inmobiliarios</h2>
+          <p class="text-gray-600 text-lg">Asesoría altamente personalizada. No cobramos por adelantado, nuestro compromiso es con los resultados y tu tranquilidad.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Servicio 1 -->
+          <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 group gs-reveal">
+            <div class="w-14 h-14 bg-gave-primary/5 rounded-xl flex items-center justify-center text-gave-primary mb-6 group-hover:bg-gave-primary group-hover:text-white transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Venta de Propiedades</h3>
+            <p class="text-gray-600 mb-6">Promocionamos tu inmueble usando estrategias efectivas para encontrar el comprador ideal en el menor tiempo posible.</p>
+            <a href="#contacto" class="inline-flex items-center gap-2 text-gave-secondary font-medium hover:text-gave-primary transition-colors">
+              Conocer más <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </a>
+          </div>
+
+          <!-- Servicio 2 -->
+          <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 group gs-reveal" style="transition-delay: 100ms;">
+            <div class="w-14 h-14 bg-gave-secondary/5 rounded-xl flex items-center justify-center text-gave-secondary mb-6 group-hover:bg-gave-secondary group-hover:text-white transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Asesoría de Compra</h3>
+            <p class="text-gray-600 mb-6">Encontramos la propiedad que se ajusta a tus necesidades, presupuesto y objetivos de inversión con total honestidad.</p>
+            <a href="#contacto" class="inline-flex items-center gap-2 text-gave-secondary font-medium hover:text-gave-primary transition-colors">
+              Conocer más <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </a>
+          </div>
+
+          <!-- Servicio 3 -->
+          <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 group gs-reveal" style="transition-delay: 200ms;">
+            <div class="w-14 h-14 bg-gave-primary/5 rounded-xl flex items-center justify-center text-gave-primary mb-6 group-hover:bg-gave-primary group-hover:text-white transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/><line x1="10" x2="8" y1="9" y2="9"/></svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Acompañamiento Legal</h3>
+            <p class="text-gray-600 mb-6">Revisión de títulos, promesas de compraventa y escrituración para que tu patrimonio esté siempre seguro.</p>
+            <a href="#contacto" class="inline-flex items-center gap-2 text-gave-secondary font-medium hover:text-gave-primary transition-colors">
+              Conocer más <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Promesa de valor -->
+    <section class="py-20 bg-gave-primary text-white relative">
+      <div class="absolute inset-0 opacity-10 bg-[url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80')] bg-cover bg-center mix-blend-overlay"></div>
+      <div class="container mx-auto px-4 md:px-8 relative z-10 text-center">
+        <h2 class="text-3xl md:text-5xl font-bold mb-8 text-balance max-w-4xl mx-auto gs-reveal">
+          "Nos mueve generar confianza, resolver tus inquietudes inmediatas y cuidar tu inversión inmobiliaria en Colombia."
+        </h2>
+        <a href="#contacto" class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-gave-primary font-bold rounded-full hover:bg-gray-100 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1 gs-reveal">
+          Hablemos de tu proyecto
+        </a>
+      </div>
+    </section>
+
+    <!-- Propiedades Destacadas (Catálogo) -->
+    <section id="propiedades" class="py-24 bg-white">
+      <div class="container mx-auto px-4 md:px-8">
+        <div class="flex flex-col md:flex-row justify-between items-end mb-12 gs-reveal">
+          <div class="max-w-2xl">
+            <div class="inline-flex items-center gap-2 text-gave-secondary font-semibold uppercase tracking-wider mb-4">
+              <span class="w-8 h-0.5 bg-gave-secondary"></span>
+              Catálogo Selecto
+            </div>
+            <h2 class="text-3xl md:text-4xl font-bold text-gave-primary">Propiedades Destacadas</h2>
+          </div>
+          <a href="/catalog.html" class="hidden md:inline-flex items-center gap-2 text-gave-secondary font-medium hover:text-gave-primary transition-colors">
+            Ver catálogo completo <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Propiedad 1 -->
+          <a href="/property.html" class="block bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 group gs-reveal">
+            <div class="relative h-64 overflow-hidden">
+              <div class="absolute top-4 left-4 z-10 bg-gave-secondary text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">
+                En Venta
+              </div>
+              <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Casa moderna" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+              <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                <p class="text-white font-bold text-xl">$COP 850.000.000</p>
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-gray-900 mb-2">Casa Moderna en Zona Norte</h3>
+              <p class="text-gray-500 text-sm mb-4 flex items-center gap-1">
+                <i data-lucide="map-pin" class="w-4 h-4 text-gave-secondary"></i> Bogotá, Colombia
+              </p>
+              <div class="flex items-center justify-between border-t border-gray-100 pt-4 mt-4">
+                <div class="flex gap-4 text-gray-600 text-sm">
+                  <span class="flex items-center gap-1"><i data-lucide="bed" class="w-4 h-4"></i> 3</span>
+                  <span class="flex items-center gap-1"><i data-lucide="bath" class="w-4 h-4"></i> 3</span>
+                  <span class="flex items-center gap-1"><i data-lucide="maximize" class="w-4 h-4"></i> 180 m²</span>
+                </div>
+              </div>
+            </div>
+          </a>
+          <!-- Propiedad 2 -->
+          <a href="/property.html" class="block bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 group gs-reveal" style="transition-delay: 100ms;">
+            <div class="relative h-64 overflow-hidden">
+              <div class="absolute top-4 left-4 z-10 bg-gave-primary text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">
+                Vendido
+              </div>
+              <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Apartamento de lujo" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 grayscale">
+              <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-gray-900 mb-2">Apartamento Vista Panorámica</h3>
+              <p class="text-gray-500 text-sm mb-4 flex items-center gap-1">
+                <i data-lucide="map-pin" class="w-4 h-4 text-gave-secondary"></i> Medellín, Colombia
+              </p>
+              <div class="flex items-center justify-between border-t border-gray-100 pt-4 mt-4">
+                <div class="flex gap-4 text-gray-600 text-sm">
+                  <span class="flex items-center gap-1"><i data-lucide="bed" class="w-4 h-4"></i> 2</span>
+                  <span class="flex items-center gap-1"><i data-lucide="bath" class="w-4 h-4"></i> 2</span>
+                  <span class="flex items-center gap-1"><i data-lucide="maximize" class="w-4 h-4"></i> 95 m²</span>
+                </div>
+              </div>
+            </div>
+          </a>
+          <!-- Propiedad 3 -->
+          <a href="/property.html" class="block bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 group gs-reveal" style="transition-delay: 200ms;">
+            <div class="relative h-64 overflow-hidden">
+              <div class="absolute top-4 left-4 z-10 bg-gave-secondary text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">
+                En Venta
+              </div>
+              <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Lote campestre" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+              <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                <p class="text-white font-bold text-xl">$COP 320.000.000</p>
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-gray-900 mb-2">Lote Campestre Exclusivo</h3>
+              <p class="text-gray-500 text-sm mb-4 flex items-center gap-1">
+                <i data-lucide="map-pin" class="w-4 h-4 text-gave-secondary"></i> Eje Cafetero, Colombia
+              </p>
+              <div class="flex items-center justify-between border-t border-gray-100 pt-4 mt-4">
+                <div class="flex gap-4 text-gray-600 text-sm">
+                  <span class="flex items-center gap-1"><i data-lucide="maximize" class="w-4 h-4"></i> 1500 m² terreno</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="mt-8 text-center md:hidden">
+          <a href="/catalog.html" class="inline-flex items-center gap-2 text-gave-secondary font-medium px-6 py-3 border border-gave-secondary rounded-full">
+            Ver catálogo completo <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Zona de influencia con Mapa Circular (Requerimiento) -->
+    
+    <section class="py-12 md:py-24 bg-gray-50 overflow-hidden relative">
+      <div class="container mx-auto px-4 md:px-8">
+        <div class="flex flex-col-reverse lg:flex-row items-center gap-8 md:gap-16">
+          <div class="w-full lg:w-1/2 relative gs-reveal flex justify-center">
+            <!-- Decorative elements for the map -->
+            <div class="absolute inset-0 bg-gave-primary/5 rounded-full transform scale-110 -z-10"></div>
+            <div class="absolute -inset-4 border border-gave-secondary/30 rounded-full animate-spin-slow" style="animation: spin 20s linear infinite;"></div>
+            
+            <div class="relative w-full aspect-square max-w-[280px] md:max-w-md rounded-full overflow-hidden shadow-2xl border-4 border-white group mx-auto">
+              <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Mercado local Colombia" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 filter brightness-90 contrast-125 saturate-50 sepia-50">
+              
+              <!-- Brand colored overlay -->
+              <div class="absolute inset-0 bg-gave-primary/40 group-hover:bg-gave-primary/20 transition-colors duration-500"></div>
+              
+              <!-- Map overlay circle indicating zone -->
+              <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 h-20 md:w-32 md:h-32 bg-gave-secondary/30 rounded-full border-2 border-gave-secondary flex items-center justify-center shadow-[0_0_20px_rgba(62,119,81,0.5)]">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gave-secondary w-8 h-8 md:w-10 md:h-10 fill-current relative z-10 animate-bounce"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
+                <div class="absolute inset-0 border border-gave-secondary rounded-full animate-ping opacity-75"></div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="w-full lg:w-1/2 space-y-4 md:space-y-6 gs-reveal text-center lg:text-left pt-6 lg:pt-0">
+            <div class="inline-flex items-center gap-2 text-gave-secondary font-semibold uppercase tracking-wider mx-auto lg:mx-0">
+              <span class="w-8 h-0.5 bg-gave-secondary"></span>
+              Cobertura
+            </div>
+            <h2 class="text-2xl md:text-4xl font-bold text-gave-primary leading-tight">
+              Conocemos el mercado local y nacional
+            </h2>
+            <p class="text-gray-600 text-sm md:text-lg">
+              Operamos con especial énfasis en las mejores zonas de Colombia, identificando oportunidades de inversión y propiedades que cumplen con los más altos estándares de calidad y legalidad.
+            </p>
+            <ul class="space-y-3 mt-4 text-gray-700 text-left max-w-md mx-auto lg:mx-0">
+              <li class="flex items-start gap-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gave-secondary flex-shrink-0 mt-1"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                <span class="text-sm md:text-base">Análisis de precios y valorización de la zona.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gave-secondary flex-shrink-0 mt-1"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                <span class="text-sm md:text-base">Estudios de viabilidad estructural y legal del sector.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gave-secondary flex-shrink-0 mt-1"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                <span class="text-sm md:text-base">Proyección de desarrollo urbano a futuro.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- Contacto (WhatsApp como acción principal) -->
+    <section id="contacto" class="py-24 bg-white relative">
+      <div class="container mx-auto px-4 md:px-8 max-w-5xl">
+        <div class="bg-gave-primary rounded-3xl overflow-hidden shadow-2xl">
+          <div class="flex flex-col md:flex-row">
+            <div class="md:w-5/12 bg-gave-secondary p-10 md:p-12 text-white flex flex-col justify-between relative overflow-hidden">
+              <!-- Pattern background -->
+              <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(white 1px, transparent 1px); background-size: 20px 20px;"></div>
+              
+              <div class="relative z-10">
+                <h3 class="text-3xl font-bold mb-4">¿Lista para el siguiente paso?</h3>
+                <p class="text-white/80 mb-8">Escríbenos directamente. Atención 1 a 1, sin intermediarios, para resolver tus dudas de inmediato.</p>
+                
+                <div class="space-y-6">
+                  <a href="mailto:contacto@gavepropiedades.com" class="flex items-center gap-4 hover:text-white/80 transition-colors">
+                    <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
+                      <i data-lucide="mail" class="w-5 h-5"></i>
+                    </div>
+                    <span>contacto@gavepropiedades.com</span>
+                  </a>
+                  <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
+                      <i data-lucide="map-pin" class="w-5 h-5"></i>
+                    </div>
+                    <span>Colombia</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="md:w-7/12 p-10 md:p-12 bg-white flex flex-col items-center justify-center text-center">
+              <img src="/logo.png" alt="Gave Propiedades" class="h-24 mb-8">
+              <h4 class="text-2xl font-bold text-gray-900 mb-4">Agendar Asesoría por WhatsApp</h4>
+              <p class="text-gray-600 mb-8 max-w-sm mx-auto">Nuestro canal preferido para brindarte respuestas rápidas y agendar una llamada de valoración sin costo inicial.</p>
+              
+              <a href="https://wa.me/573183593507?text=Hola%20Gave%20Propiedades,%20quisiera%20asesor%C3%ADa%20sobre..." target="_blank" rel="noopener noreferrer" class="whatsapp-btn flex items-center justify-center gap-3 w-full max-w-xs bg-[#25D366] text-white font-bold py-4 px-8 rounded-full hover:bg-[#128C7E] transition-colors text-lg shadow-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-circle"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
+                Chat Directo
+              </a>
+              <p class="mt-4 text-xs text-gray-400">Respuesta típica: en menos de 1 hora.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8 border-t border-gray-800">
+      <div class="container mx-auto px-4 md:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+          <div>
+            <img src="/logo-bn.png" alt="Gave Propiedades Logo B/N" class="h-20 w-auto object-contain mb-6 filter invert">
+            <p class="text-gray-400 text-sm max-w-xs leading-relaxed">
+              Asesoría inmobiliaria basada en confianza, conocimiento legal y acompañamiento integral en la compra y venta de propiedades en Colombia.
+            </p>
+          </div>
+          <div>
+            <h4 class="text-lg font-bold mb-6 text-white tracking-wide">Enlaces Rápidos</h4>
+            <ul class="space-y-3">
+              <li><a href="/index.html" class="text-gray-400 hover:text-gave-secondary transition-colors">Inicio</a></li>
+              <li><a href="#nosotros" class="text-gray-400 hover:text-gave-secondary transition-colors">Sobre Nosotros</a></li>
+              <li><a href="#servicios" class="text-gray-400 hover:text-gave-secondary transition-colors">Servicios Legales y Comerciales</a></li>
+              <li><a href="#propiedades" class="text-gray-400 hover:text-gave-secondary transition-colors">Catálogo de Propiedades</a></li>
+              <li><a href="#contacto" class="text-gray-400 hover:text-gave-secondary transition-colors">Agendar Cita</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="text-lg font-bold mb-6 text-white tracking-wide">Síguenos</h4>
+            <div class="flex gap-4">
+              <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-gave-secondary hover:text-white transition-all">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+              </a>
+              <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-gave-secondary hover:text-white transition-all">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+              </a>
+              <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-gave-secondary hover:text-white transition-all">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="pt-8 border-t border-gray-800 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-500">
+          <p>&copy; 2024 Gave Propiedades. Todos los derechos reservados.</p>
+          <div class="flex gap-6">
+            <a href="#" class="hover:text-white transition-colors">Política de Privacidad</a>
+            <a href="#" class="hover:text-white transition-colors">Términos de Servicio</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Botón flotante WhatsApp -->
+    <a href="https://wa.me/573183593507?text=Hola,%20vengo%20de%20la%20página%20web" target="_blank" rel="noopener noreferrer" class="fixed bottom-6 right-6 w-14 h-14 bg-[#25D366] text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform z-50 whatsapp-btn" aria-label="Contactar por WhatsApp">
+      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-circle"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
+    </a>
+
+    <!-- Scripts -->
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>
