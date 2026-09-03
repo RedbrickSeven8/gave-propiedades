@@ -17,19 +17,21 @@ export const properties = [
     antiguedad: '1 a 8 años',
     remodelado: 'Sí',
     permuta: 'No',
+    description: 'Hermosa casa moderna ubicada en exclusivo sector del norte de Bogotá. Cuenta con amplios espacios iluminados naturalmente, cocina tipo americano con acabados de lujo, sala comedor integrados, jardín privado, estudio y zona de ropas independiente. Conjunto cerrado con vigilancia 24/7 y excelentes zonas comunes.',
     mainImg: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
     images: [
-      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
-      'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'
+      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'
     ],
-    features: ['Piscina', 'Gimnasio', 'Salón social', 'Zonas verdes', 'Vigilancia 24/7', 'Alta valorización', 'Cerca a centros comerciales']
+    features: ['Piscina', 'Gimnasio', 'Salón social', 'Zonas verdes', 'Vigilancia 24/7', 'Alta valorización', 'Cerca a centros comerciales', 'Cámaras de seguridad', 'Parqueadero de visitantes']
   },
   {
     id: 'ref-002',
     type: 'Apartamento',
     status: 'Usado',
     price: 650000000,
-    title: 'Apartamento Vista Panorámica',
+    title: 'Apartamento Vista Panorámica El Poblado',
     location: 'Medellín, Colombia',
     beds: 2,
     baths: 2,
@@ -42,12 +44,14 @@ export const properties = [
     antiguedad: 'Menos de 1 año',
     remodelado: 'No',
     permuta: 'No',
+    description: 'Espectacular apartamento en piso alto con vista ininterrumpida a las montañas de Medellín. Diseño contemporáneo de concepto abierto, balcón panorámico amplio, acabados premium y cocina integral equipada. Edificio con amenidades de club house.',
     mainImg: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
     images: [
-      'https://images.unsplash.com/photo-1512918580421-df13b2c6eeb4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
-      'https://images.unsplash.com/photo-1512918580421-df13b2c6eeb4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'
+      'https://images.unsplash.com/photo-1512918580421-df13b2c6eeb4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'
     ],
-    features: ['Gimnasio', 'Balcón', 'Vigilancia 24/7', 'Cerca a centros comerciales', 'Excelentes vías de acceso']
+    features: ['Gimnasio', 'Balcón panorámico', 'Vigilancia 24/7', 'Cerca a centros comerciales', 'Excelentes vías de acceso', 'Piscina sinfín', 'Coworking']
   },
   {
     id: 'ref-003',
@@ -67,9 +71,13 @@ export const properties = [
     antiguedad: 'N/A',
     remodelado: 'N/A',
     permuta: 'Sí',
-    mainImg: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
-    images: [],
-    features: ['Zonas verdes', 'Vigilancia 24/7', 'Alta valorización', 'Entorno seguro y residencial']
+    description: 'Terreno campestre con topografía ideal y clima templado en el corazón del Eje Cafetero. Ubicado en parcelación campestre de alta categoría con vías pavimentadas, acueducto propio, red eléctrica subterránea y vista privilegiada al paisaje cafetero.',
+    mainImg: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+    images: [
+      'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'
+    ],
+    features: ['Zonas verdes', 'Vigilancia 24/7', 'Alta valorización', 'Entorno seguro y campestre', 'Servicios públicos disponibles', 'Vías pavimentadas']
   },
   {
     id: 'ref-004',
@@ -89,16 +97,20 @@ export const properties = [
     antiguedad: '1 a 8 años',
     remodelado: 'Sí',
     permuta: 'No',
+    description: 'Exclusivo apartamento en el sector más cotizado de Barranquilla. Gran terraza con vista a la brisa caribeña, acabados en porcelanato, iluminación LED inteligente y alcoba principal con vestier y baño privado.',
     mainImg: 'https://images.unsplash.com/photo-1512915922686-57c11dde9b6b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
-    images: [],
-    features: ['Piscina', 'Gimnasio', 'Balcón', 'Vigilancia 24/7', 'Alta valorización']
+    images: [
+      'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1502005229762-ee1b2b93e000?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'
+    ],
+    features: ['Piscina', 'Gimnasio', 'Balcón / Terraza', 'Vigilancia 24/7', 'Alta valorización', 'Planta eléctrica total', 'Zona infantil']
   },
   {
     id: 'ref-005',
     type: 'Casa',
     status: 'Usado',
     price: 950000000,
-    title: 'Casa Familiar Amplia',
+    title: 'Casa Familiar Amplia con Jardín',
     location: 'Cali, Colombia',
     beds: 4,
     baths: 3,
@@ -111,8 +123,37 @@ export const properties = [
     antiguedad: '9 a 15 años',
     remodelado: 'Sí',
     permuta: 'Sí',
+    description: 'Imponente casa familiar en condominio campestre en Cali. Amplios jardines internos, zona BBQ techada, 4 cómodas habitaciones, sala de estar independiente y acabados en madera maciza restaurada.',
     mainImg: 'https://images.unsplash.com/photo-1449844908441-8829872d2607?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
-    images: [],
-    features: ['Jardín', 'Estudio', 'Zonas verdes', 'Colegios cercanos', 'Entorno seguro y residencial']
+    images: [
+      'https://images.unsplash.com/photo-1513694203232-719a280e022f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1484154218962-a197022b5858?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'
+    ],
+    features: ['Jardín privado', 'Estudio', 'Zonas verdes', 'Colegios cercanos', 'Entorno seguro y residencial', 'Zona BBQ', 'Portería 24h']
+  },
+  {
+    id: 'ref-006',
+    type: 'Apartamento',
+    status: 'Nuevo',
+    price: 430000000,
+    title: 'Apartamento Studio Moderno',
+    location: 'Bucaramanga, Colombia',
+    beds: 1,
+    baths: 2,
+    parking: 1,
+    areaConstruida: 62,
+    areaPrivada: 58,
+    areaTerreno: 0,
+    estrato: 4,
+    pisos: 1,
+    antiguedad: 'A estrenar',
+    remodelado: 'No',
+    permuta: 'No',
+    description: 'Apartamento moderno tipo loft a estrenar. Ideal para inversionistas o jóvenes profesionales. Excelente iluminación, balcón privado y acceso a terraza comunitaria con vista 360 grados.',
+    mainImg: 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+    images: [
+      'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'
+    ],
+    features: ['Rooftop con BBQ', 'Gimnasio', 'Vigilancia 24/7', 'Ascensor', 'Cerca a universidades y centros médicos']
   }
 ];

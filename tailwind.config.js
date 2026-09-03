@@ -2,14 +2,16 @@
 export default {
   content: [
     "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-    "./main.js"
+    "./catalog.html",
+    "./property.html",
+    "./*.js",
+    "./src/**/*.{js,ts,jsx,tsx}"
   ],
   theme: {
     extend: {
       colors: {
-        'gave-primary': '#00375D', // Main brand color
-        'gave-secondary': '#3E7751', // Accent brand color
+        'gave-primary': '#00375D', // Main brand blue
+        'gave-secondary': '#3E7751', // Accent brand green
       },
       fontFamily: {
         sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
