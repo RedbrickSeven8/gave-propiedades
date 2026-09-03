@@ -59,7 +59,7 @@ export const properties = [
     beds: 0,
     baths: 0,
     parking: 0,
-    areaConstruida: 0,
+    areaConstruida: 1500,
     areaPrivada: 0,
     areaTerreno: 1500,
     estrato: 3,
