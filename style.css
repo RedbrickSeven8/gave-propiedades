@@ -67,3 +67,10 @@ body {
   flex: 0 0 100%;
   width: 100%;
 }
+
+/* NATIVE SCROLL SNAP CAROUSEL MOBILE TWEAKS */
+@media (max-width: 768px) {
+  #asesoras-carousel {
+    height: 350px !important;
+  }
+}

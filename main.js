@@ -127,3 +127,47 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error("GSAP Error:", e);
     }
 });
+
+// --- Catalog Filter Logic ---
+document.addEventListener('DOMContentLoaded', () => {
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const propertyCards = document.querySelectorAll('.property-card');
+    
+    if(filterBtns.length > 0) {
+        // Tag cards based on comments for simplicity
+        propertyCards.forEach(card => {
+            const html = card.innerHTML;
+            if(html.includes('DATA:casa')) card.dataset.type = (card.dataset.type || '') + ' casa';
+            if(html.includes('DATA:apartamento')) card.dataset.type = (card.dataset.type || '') + ' apartamento';
+            if(html.includes('DATA:lote')) card.dataset.type = (card.dataset.type || '') + ' lote';
+            if(html.includes('DATA:venta') || html.includes('En Venta')) card.dataset.type = (card.dataset.type || '') + ' venta';
+        });
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Update active state
+                filterBtns.forEach(b => {
+                    b.classList.remove('bg-gave-primary', 'text-white');
+                    b.classList.add('bg-white', 'text-gray-700');
+                });
+                btn.classList.remove('bg-white', 'text-gray-700');
+                btn.classList.add('bg-gave-primary', 'text-white');
+                
+                const filterValue = btn.getAttribute('data-filter');
+                
+                propertyCards.forEach(card => {
+                    if (filterValue === 'all') {
+                        card.style.display = 'block';
+                    } else {
+                        const types = card.dataset.type || '';
+                        if (types.includes(filterValue)) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    }
+                });
+            });
+        });
+    }
+});
