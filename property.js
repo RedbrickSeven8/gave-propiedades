@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Build features list
     const featuresHtml = property.features.map(f => `
         <li class="flex items-center gap-3 bg-gray-50 p-3 rounded-xl border border-gray-100 text-gray-700 font-medium">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-gave-secondary flex-shrink-0"><polyline points="20 6 9 17 4 12"/></svg> 
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"     class="text-gave-secondary flex-shrink-0"><polyline points="20 6 9 17 4 12"/></svg> 
             <span>${f}</span>
         </li>`).join('');
         
@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <!-- Breadcrumb & Header Title -->
         <div class="mb-8">
           <a href="/catalog.html" class="inline-flex items-center gap-2 text-gray-500 hover:text-gave-primary transition-colors mb-6 font-medium">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"    ><path d="m15 18-6-6 6-6"/></svg>
             Volver al catálogo
           </a>
           
@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
               </div>
               <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gave-primary leading-tight">${property.title}</h1>
               <p class="text-gray-500 mt-3 text-lg flex items-center gap-2 font-medium">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gave-secondary"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"     class="text-gave-secondary"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
                 ${property.location}
               </p>
             </div>
@@ -227,7 +227,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <!-- Círculo señalando la zona aproximada -->
                 <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-28 h-28 md:w-36 md:h-36 bg-gave-secondary/30 rounded-full border-2 border-gave-secondary flex items-center justify-center animate-pulse shadow-[0_0_25px_rgba(62,119,81,0.6)] pointer-events-none">
                   <div class="bg-white p-2.5 rounded-full shadow-lg border border-gave-secondary text-gave-secondary">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"    ><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
                   </div>
                 </div>
               </div>
