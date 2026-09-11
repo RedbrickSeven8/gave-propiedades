@@ -1,7 +1,7 @@
 import './style.css';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import TeamPhotoCarousel from './src/components/TeamPhotoCarousel.jsx';
+import GaveCarousel from './src/components/GaveCarousel.jsx';
 import { createIcons } from 'lucide';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -15,17 +15,29 @@ try {
     console.error("Lucide error:", e);
 }
 
-// Function to mount React carousel immediately or on DOMContentLoaded
+// Function to mount React carousel
 function initReactCarousel() {
     const reactMount = document.getElementById('react-team-carousel');
     if (reactMount && !reactMount.dataset.mounted) {
         reactMount.dataset.mounted = "true";
         const root = ReactDOM.createRoot(reactMount);
-        root.render(<TeamPhotoCarousel autoPlayInterval={3500} transitionDuration={800} />);
+        
+        // Responsive baseWidth
+        const isMobile = window.innerWidth < 480;
+        const width = isMobile ? Math.min(window.innerWidth - 32, 340) : 380;
+        
+        root.render(
+            <GaveCarousel 
+                baseWidth={width}
+                autoplay={true}
+                autoplayDelay={3500}
+                pauseOnHover={true}
+                loop={true}
+            />
+        );
     }
 }
 
-// Run immediately if DOM ready, otherwise on event
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initReactCarousel);
 } else {

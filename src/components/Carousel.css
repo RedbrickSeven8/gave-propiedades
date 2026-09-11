@@ -1,0 +1,199 @@
+.gave-carousel-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.carousel-container {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(0, 55, 93, 0.2);
+  border-radius: 28px;
+  padding: 16px;
+  --outer-r: 28px;
+  --p-distance: 12px;
+  background: linear-gradient(145deg, #0d2137 0%, #00375D 60%, #00223a 100%);
+  box-shadow: 
+    0 25px 50px -12px rgba(0, 35, 60, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.15),
+    inset 0 1px 2px rgba(255, 255, 255, 0.25),
+    inset 0 -2px 6px rgba(0, 0, 0, 0.5);
+  max-width: 100%;
+}
+
+.carousel-track {
+  display: flex;
+}
+
+.carousel-item {
+  position: relative;
+  display: flex;
+  flex-shrink: 0;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-end;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: calc(var(--outer-r) - var(--p-distance));
+  background-color: #06111e;
+  overflow: hidden;
+  cursor: grab;
+  box-shadow: 
+    0 15px 30px -8px rgba(0, 0, 0, 0.5),
+    inset 0 1px 1px rgba(255, 255, 255, 0.3);
+  height: 420px;
+}
+
+.carousel-item:active {
+  cursor: grabbing;
+}
+
+.carousel-photo-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  filter: brightness(1.02) contrast(1.03);
+}
+
+.carousel-photo-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0, 55, 93, 0.2) 40%, rgba(6, 17, 30, 0.92) 100%);
+  pointer-events: none;
+}
+
+.carousel-item-header {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 2;
+}
+
+.carousel-tag-container {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.carousel-tag-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #3E7751;
+  box-shadow: 0 0 8px #34D399;
+}
+
+.carousel-item-content {
+  position: relative;
+  z-index: 2;
+  padding: 16px 18px;
+  background: rgba(6, 17, 30, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  margin: 10px;
+  border-radius: 16px;
+}
+
+.carousel-item-subtitle {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #34D399;
+  margin-bottom: 2px;
+}
+
+.carousel-item-title {
+  margin-bottom: 4px;
+  font-weight: 800;
+  font-size: 18px;
+  color: #fff;
+  line-height: 1.25;
+}
+
+.carousel-item-description {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.35;
+  margin: 0;
+}
+
+/* Indicators & Controls */
+.carousel-controls-bar {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 14px;
+  padding-bottom: 2px;
+}
+
+.carousel-arrow-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.carousel-arrow-btn:hover {
+  background: #3E7751;
+  transform: scale(1.08);
+  border-color: #3E7751;
+}
+
+.carousel-arrow-btn:active {
+  transform: scale(0.95);
+}
+
+.carousel-indicators {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.carousel-indicator {
+  height: 8px;
+  border: none;
+  padding: 0;
+  appearance: none;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 300ms ease;
+}
+
+.carousel-indicator.active {
+  width: 28px;
+  background-color: #3E7751;
+  box-shadow: 0 0 10px rgba(62, 119, 81, 0.8);
+}
+
+.carousel-indicator.inactive {
+  width: 8px;
+  background-color: rgba(255, 255, 255, 0.35);
+}
+
+.carousel-indicator.inactive:hover {
+  background-color: rgba(255, 255, 255, 0.7);
+}
