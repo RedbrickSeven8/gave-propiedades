@@ -93,98 +93,227 @@
     </section>
 
     <!-- Sobre Nosotros / Diferenciador -->
-    <section id="nosotros" class="py-24 bg-white relative">
-      <div class="container mx-auto px-4 md:px-8">
-        <div class="flex flex-col lg:flex-row items-center gap-16">
+    <section id="nosotros" class="py-24 bg-white relative overflow-hidden">
+      <div class="container mx-auto px-4 md:px-8 max-w-7xl">
+        <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+          
+          <!-- Left Column: Story & Highlights -->
           <div class="lg:w-1/2 space-y-8 gs-reveal">
             <div class="inline-flex items-center gap-2 text-gave-secondary font-semibold uppercase tracking-wider">
               <span class="w-8 h-0.5 bg-gave-secondary"></span>
               Sobre Gave Propiedades
             </div>
-            <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gave-primary leading-tight">
+            
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gave-primary leading-tight">
               Más que agentes, somos tus aliadas estratégicas
             </h2>
+            
             <p class="text-gray-600 text-lg leading-relaxed">
-              Entendemos que comprar o vender una propiedad es una de las decisiones financieras más importantes de tu vida. Por eso, no solo conectamos compradores con vendedores; brindamos un acompañamiento integral.
+              Somos dos profesionales apasionadas con amplia trayectoria en el mercado inmobiliario colombiano. Nuestro propósito es transformar la compra y venta de inmuebles en una experiencia transparente, segura y sin complicaciones.
             </p>
-            <div class="space-y-4">
-              <div class="flex items-start gap-4">
-                <div class="mt-1 bg-gave-primary/10 p-2 rounded-lg text-gave-primary">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg>
+            
+            <div class="space-y-5 pt-2">
+              <div class="flex items-start gap-4 p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-gave-secondary/30 transition-colors">
+                <div class="mt-1 bg-gave-primary/10 p-2.5 rounded-xl text-gave-primary flex-shrink-0">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg>
                 </div>
                 <div>
-                  <h3 class="text-xl font-semibold text-gray-900 mb-1">Acompañamiento Legal y Estructural</h3>
-                  <p class="text-gray-600">Conocimiento profundo de las normativas vigentes para garantizar transacciones seguras y transparentes.</p>
+                  <h3 class="text-lg font-bold text-gray-900 mb-1">Acompañamiento Legal y Técnico</h3>
+                  <p class="text-gray-600 text-sm leading-relaxed">Estudio exhaustivo de títulos, contratos notariales y normatividad vigente para proteger tu patrimonio en cada etapa.</p>
                 </div>
               </div>
-              <div class="flex items-start gap-4">
-                <div class="mt-1 bg-gave-secondary/10 p-2 rounded-lg text-gave-secondary">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="m9 12 2 2 4-4"/></svg>
-                </div>
-                <div>
-                  <h3 class="text-xl font-semibold text-gray-900 mb-1">Confianza Comprobada</h3>
-                  <p class="text-gray-600">Nuestro mayor aval es la tranquilidad de clientes corporativos y consumidores finales que ya han confiado en nosotras.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="lg:w-1/2 relative gs-reveal">
-            <div class="absolute -inset-4 bg-gradient-to-tr from-gave-primary/20 to-gave-secondary/20 rounded-2xl transform rotate-3"></div>
-            
-    <!-- CAROUSEL START -->
-    <style>
-      .my-custom-carousel {
-        position: relative;
-        width: 100%;
-        height: 500px;
-        perspective: 1000px;
-        border-radius: 1rem;
-        overflow: hidden;
-        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-      }
-      .my-custom-carousel img {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        opacity: 0;
-        transform: scale(0.8) translateY(-5%);
-        transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s ease-in-out;
-        z-index: 1;
-      }
-      .my-custom-carousel img.active {
-        opacity: 1;
-        transform: scale(1) translateY(0);
-        z-index: 2;
-      }
-    </style>
-    
-            
-            <div class="relative w-full rounded-2xl shadow-2xl overflow-hidden bg-gray-200">
-              <div id="asesoras-carousel" class="native-carousel w-full h-[350px] md:h-[500px]">
-                <div class="native-carousel-item relative h-full">
-                  <img src="/img-asesora-1.png" alt="Asesora 1" class="w-full h-full object-cover">
-                </div>
-                <div class="native-carousel-item relative h-full">
-                  <img src="/img-asesora-2.png" alt="Asesora 2" class="w-full h-full object-cover">
-                </div>
-              </div>
-            </div>
-            
-            <!-- Experience Badge -->
 
-            <div class="absolute -bottom-6 -left-6 bg-white p-6 rounded-xl shadow-xl flex items-center gap-4">
-              <div class="text-gave-secondary">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-10 h-10"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+              <div class="flex items-start gap-4 p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-gave-secondary/30 transition-colors">
+                <div class="mt-1 bg-gave-secondary/10 p-2.5 rounded-xl text-gave-secondary flex-shrink-0">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="m9 12 2 2 4-4"/></svg>
+                </div>
+                <div>
+                  <h3 class="text-lg font-bold text-gray-900 mb-1">Confianza y Cero Cobros de Anticipo</h3>
+                  <p class="text-gray-600 text-sm leading-relaxed">Trabajamos orientadas a resultados reales. No cobramos tarifas por adelantado para gestionar tu propiedad.</p>
+                </div>
               </div>
-              <div>
-                <p class="text-3xl font-bold text-gave-primary">100%</p>
-                <p class="text-sm text-gray-500 font-medium uppercase tracking-wide">Transparencia</p>
+            </div>
+
+            <div class="pt-2 flex items-center gap-6">
+              <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-full bg-gave-secondary text-white flex items-center justify-center font-bold text-lg shadow-md">
+                  100%
+                </div>
+                <div>
+                  <p class="font-bold text-gray-900 text-sm">Transparencia</p>
+                  <p class="text-xs text-gray-500">Garantizada en cada contrato</p>
+                </div>
+              </div>
+              <div class="h-10 w-px bg-gray-200"></div>
+              <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-full bg-gave-primary text-white flex items-center justify-center font-bold text-lg shadow-md">
+                  1 a 1
+                </div>
+                <div>
+                  <p class="font-bold text-gray-900 text-sm">Atención Personal</p>
+                  <p class="text-xs text-gray-500">Sin intermediarios</p>
+                </div>
               </div>
             </div>
           </div>
+
+          <!-- Right Column: Interactive Card Carousel (Modern Minimalist Pill Carousel) -->
+          <div class="lg:w-1/2 w-full gs-reveal">
+            
+            <div id="team-carousel-container" class="relative w-full max-w-lg mx-auto bg-gradient-to-br from-[#121927] via-[#0F172A] to-[#0A0F1D] text-white p-7 md:p-9 rounded-[2.5rem] shadow-2xl border border-white/10 overflow-hidden select-none group">
+              
+              <!-- Subtle glow background effects -->
+              <div class="absolute -top-24 -right-24 w-64 h-64 bg-gave-secondary/20 rounded-full blur-3xl pointer-events-none"></div>
+              <div class="absolute -bottom-24 -left-24 w-64 h-64 bg-gave-primary/40 rounded-full blur-3xl pointer-events-none"></div>
+
+              <!-- Slide 1: Asesora Comercial y Estratégica -->
+              <div class="team-slide transition-all duration-500 ease-out opacity-100 block" data-slide="0">
+                
+                <!-- Avatar with pulsing status indicator -->
+                <div class="flex items-center justify-between mb-6">
+                  <div class="relative">
+                    <div class="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden border-2 border-gave-secondary/80 p-1 bg-white/5 backdrop-blur-md shadow-lg">
+                      <img src="/img-asesora-1.png" alt="Asesora Inmobiliaria Senior - Gave Propiedades" class="w-full h-full object-cover rounded-full">
+                    </div>
+                    <span class="absolute bottom-1 right-1 w-4 h-4 bg-emerald-400 border-2 border-[#0F172A] rounded-full shadow-sm" title="Disponible"></span>
+                  </div>
+                  
+                  <span class="px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/10 text-emerald-300 text-xs font-bold tracking-wider uppercase">
+                    Asesoría 1 a 1
+                  </span>
+                </div>
+
+                <!-- Role and Name -->
+                <div class="mb-4">
+                  <span class="text-gave-secondary text-xs font-bold uppercase tracking-widest block mb-1">Cofundadora & Consultora</span>
+                  <h3 class="text-2xl md:text-3xl font-extrabold text-white tracking-tight leading-snug">
+                    Especialista en Valoración y Mercado
+                  </h3>
+                </div>
+
+                <!-- Description -->
+                <p class="text-gray-300 text-sm md:text-base leading-relaxed mb-6 font-normal min-h-[72px]">
+                  Con años de experiencia conectando compradores y vendedores en toda Colombia. Experta en fijación estratégica de precios, negociación directa y análisis de retorno de inversión inmobiliaria.
+                </p>
+
+                <!-- Core pill badges -->
+                <div class="flex flex-wrap gap-2 pt-1 pb-2">
+                  <span class="px-3 py-1 rounded-xl bg-white/10 text-xs font-medium text-gray-200 border border-white/5">Estrategia Comercial</span>
+                  <span class="px-3 py-1 rounded-xl bg-white/10 text-xs font-medium text-gray-200 border border-white/5">Negociación Directa</span>
+                  <span class="px-3 py-1 rounded-xl bg-white/10 text-xs font-medium text-gray-200 border border-white/5">Residencial & Lotes</span>
+                </div>
+
+              </div>
+
+              <!-- Slide 2: Asesora Jurídica y Estructural -->
+              <div class="team-slide transition-all duration-500 ease-out opacity-0 hidden" data-slide="1">
+                
+                <!-- Avatar with pulsing status indicator -->
+                <div class="flex items-center justify-between mb-6">
+                  <div class="relative">
+                    <div class="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden border-2 border-gave-secondary/80 p-1 bg-white/5 backdrop-blur-md shadow-lg">
+                      <img src="/img-asesora-2.png" alt="Asesora Jurídica y Técnica - Gave Propiedades" class="w-full h-full object-cover rounded-full">
+                    </div>
+                    <span class="absolute bottom-1 right-1 w-4 h-4 bg-emerald-400 border-2 border-[#0F172A] rounded-full shadow-sm" title="Disponible"></span>
+                  </div>
+                  
+                  <span class="px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/10 text-emerald-300 text-xs font-bold tracking-wider uppercase">
+                    Respaldo Legal
+                  </span>
+                </div>
+
+                <!-- Role and Name -->
+                <div class="mb-4">
+                  <span class="text-gave-secondary text-xs font-bold uppercase tracking-widest block mb-1">Cofundadora & Consultora</span>
+                  <h3 class="text-2xl md:text-3xl font-extrabold text-white tracking-tight leading-snug">
+                    Especialista Legal y Estructural
+                  </h3>
+                </div>
+
+                <!-- Description -->
+                <p class="text-gray-300 text-sm md:text-base leading-relaxed mb-6 font-normal min-h-[72px]">
+                  Lidera el acompañamiento jurídico en estudio de títulos, contratos de promesa, normativas de propiedad horizontal y saneamiento legal para garantizar que tu inversión esté 100% blindada.
+                </p>
+
+                <!-- Core pill badges -->
+                <div class="flex flex-wrap gap-2 pt-1 pb-2">
+                  <span class="px-3 py-1 rounded-xl bg-white/10 text-xs font-medium text-gray-200 border border-white/5">Estudio de Títulos</span>
+                  <span class="px-3 py-1 rounded-xl bg-white/10 text-xs font-medium text-gray-200 border border-white/5">Contratos Notariales</span>
+                  <span class="px-3 py-1 rounded-xl bg-white/10 text-xs font-medium text-gray-200 border border-white/5">Seguridad Jurídica</span>
+                </div>
+
+              </div>
+
+              <!-- Slide 3: Propósito y Metodología Gave -->
+              <div class="team-slide transition-all duration-500 ease-out opacity-0 hidden" data-slide="2">
+                
+                <!-- Avatar / Brand Icon -->
+                <div class="flex items-center justify-between mb-6">
+                  <div class="relative">
+                    <div class="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden border-2 border-gave-secondary/80 p-2 bg-white flex items-center justify-center shadow-lg">
+                      <img src="/logo.png" alt="Gave Propiedades" class="w-full h-full object-contain">
+                    </div>
+                    <span class="absolute bottom-1 right-1 w-4 h-4 bg-gave-secondary border-2 border-[#0F172A] rounded-full shadow-sm"></span>
+                  </div>
+                  
+                  <span class="px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/10 text-emerald-300 text-xs font-bold tracking-wider uppercase">
+                    Nuestra Promesa
+                  </span>
+                </div>
+
+                <!-- Role and Name -->
+                <div class="mb-4">
+                  <span class="text-gave-secondary text-xs font-bold uppercase tracking-widest block mb-1">Metodología Gave</span>
+                  <h3 class="text-2xl md:text-3xl font-extrabold text-white tracking-tight leading-snug">
+                    Tu Confianza, Nuestra Mayor Prioridad
+                  </h3>
+                </div>
+
+                <!-- Description -->
+                <p class="text-gray-300 text-sm md:text-base leading-relaxed mb-6 font-normal min-h-[72px]">
+                  Trabajamos sin anticipos ni cobros ocultos. Nuestro equipo multidisciplinario combina estrategia comercial, análisis técnico y rigor legal para cerrar negocios exitosos en Colombia.
+                </p>
+
+                <!-- Core pill badges -->
+                <div class="flex flex-wrap gap-2 pt-1 pb-2">
+                  <span class="px-3 py-1 rounded-xl bg-white/10 text-xs font-medium text-gray-200 border border-white/5">Sin Cobros Previos</span>
+                  <span class="px-3 py-1 rounded-xl bg-white/10 text-xs font-medium text-gray-200 border border-white/5">Cobertura Nacional</span>
+                  <span class="px-3 py-1 rounded-xl bg-white/10 text-xs font-medium text-gray-200 border border-white/5">Trato Cercano</span>
+                </div>
+
+              </div>
+
+              <!-- Carousel Navigation & Indicators (Bottom Controls Bar) -->
+              <div class="pt-6 mt-4 border-t border-white/10 flex items-center justify-between">
+                
+                <!-- Left arrow button -->
+                <button id="team-prev-btn" class="w-11 h-11 rounded-full bg-white/10 hover:bg-gave-secondary text-white flex items-center justify-center transition-all duration-300 hover:scale-105 active:scale-95 border border-white/10" aria-label="Slide anterior">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+                </button>
+
+                <!-- Dot Indicators (Segmented Pill Buttons) -->
+                <div class="flex items-center gap-2" id="team-dots-container">
+                  <button class="team-dot h-2.5 rounded-full transition-all duration-300 w-8 bg-gave-secondary shadow-sm shadow-emerald-500/30" data-target="0" aria-label="Ir a asesora 1"></button>
+                  <button class="team-dot h-2.5 rounded-full transition-all duration-300 w-2.5 bg-white/30 hover:bg-white/60" data-target="1" aria-label="Ir a asesora 2"></button>
+                  <button class="team-dot h-2.5 rounded-full transition-all duration-300 w-2.5 bg-white/30 hover:bg-white/60" data-target="2" aria-label="Ir a promesa Gave"></button>
+                </div>
+
+                <!-- Right arrow button -->
+                <button id="team-next-btn" class="w-11 h-11 rounded-full bg-white/10 hover:bg-gave-secondary text-white flex items-center justify-center transition-all duration-300 hover:scale-105 active:scale-95 border border-white/10" aria-label="Siguiente slide">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                </button>
+
+              </div>
+
+            </div>
+            
+            <p class="text-center text-xs text-gray-400 mt-4 flex items-center justify-center gap-1.5">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gave-secondary"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              Rotación automática cada 4 segundos · Puedes pausar o cambiar con los controles
+            </p>
+
+          </div>
+
         </div>
       </div>
     </section>

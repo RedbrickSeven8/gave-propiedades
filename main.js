@@ -1,4 +1,3 @@
-
 import './style.css';
 import { createIcons } from 'lucide';
 import { gsap } from 'gsap';
@@ -15,8 +14,6 @@ try {
 
 // Ensure execution happens after DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
-    console.log("DOM loaded. Initializing JS...");
-
     // 1. MOBILE MENU LOGIC (Vanilla, foolproof)
     const mobileBtn = document.getElementById('mobile-menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
@@ -45,50 +42,135 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.body.style.overflow = '';
             });
         });
-    } else {
-        console.error("Mobile menu elements not found!");
     }
 
     // 2. NAVBAR SCROLL LOGIC
     const navbar = document.getElementById('navbar');
-    const desktopLinks = document.querySelectorAll('.nav-link');
-    
     const updateNavbar = () => {
-    // Navbar is now always white for better logo contrast
-    if (!navbar) return;
-    navbar.classList.add('bg-white', 'shadow-md', 'py-2');
-    navLinks.forEach(link => {
-        link.classList.remove('text-white');
-        link.classList.add('text-gave-primary');
-    });
-    if(mobileBtn) {
-        mobileBtn.classList.remove('text-white', 'bg-black/20', 'border-white/10');
-        mobileBtn.classList.add('text-gave-primary', 'bg-gray-100', 'border-gray-200');
-    }
-};
+        if (!navbar) return;
+        navbar.classList.add('bg-white', 'shadow-md', 'py-2');
+    };
     window.addEventListener('scroll', updateNavbar);
     updateNavbar();
 
-    // 3. CAROUSEL LOGIC (Native Scroll)
-    const carousel = document.getElementById('asesoras-carousel');
-    if (carousel) {
-        let isSlide1 = true;
-        setInterval(() => {
-            if (isSlide1) {
-                // Scroll to slide 2
-                carousel.scrollTo({
-                    left: carousel.offsetWidth,
-                    behavior: 'smooth'
-                });
-            } else {
-                // Scroll to slide 1
-                carousel.scrollTo({
-                    left: 0,
-                    behavior: 'smooth'
-                });
-            }
-            isSlide1 = !isSlide1;
-        }, 3500);
+    // 3. MODERN INTERACTIVE TEAM CAROUSEL (Auto-play + Manual Controls)
+    const slides = document.querySelectorAll('.team-slide');
+    const dots = document.querySelectorAll('.team-dot');
+    const prevBtn = document.getElementById('team-prev-btn');
+    const nextBtn = document.getElementById('team-next-btn');
+    const container = document.getElementById('team-carousel-container');
+
+    if (slides.length > 0) {
+        let currentSlide = 0;
+        let slideInterval = null;
+        const totalSlides = slides.length;
+        const autoPlayDelay = 4000; // 4 seconds
+
+        const showSlide = (index) => {
+            // Handle bounds
+            let targetIndex = index;
+            if (targetIndex >= totalSlides) targetIndex = 0;
+            if (targetIndex < 0) targetIndex = totalSlides - 1;
+
+            currentSlide = targetIndex;
+
+            slides.forEach((slide, idx) => {
+                if (idx === targetIndex) {
+                    slide.classList.remove('hidden');
+                    // Trigger fade & slight transform
+                    requestAnimationFrame(() => {
+                        slide.classList.remove('opacity-0', 'translate-x-4');
+                        slide.classList.add('opacity-100', 'translate-x-0');
+                    });
+                } else {
+                    slide.classList.remove('opacity-100', 'translate-x-0');
+                    slide.classList.add('opacity-0', 'translate-x-4');
+                    // Hide after transition
+                    setTimeout(() => {
+                        if (currentSlide !== idx) {
+                            slide.classList.add('hidden');
+                        }
+                    }, 300);
+                }
+            });
+
+            // Update dot pill indicators
+            dots.forEach((dot, idx) => {
+                if (idx === targetIndex) {
+                    dot.classList.remove('w-2.5', 'bg-white/30');
+                    dot.classList.add('w-8', 'bg-gave-secondary', 'shadow-sm', 'shadow-emerald-500/30');
+                } else {
+                    dot.classList.remove('w-8', 'bg-gave-secondary', 'shadow-sm', 'shadow-emerald-500/30');
+                    dot.classList.add('w-2.5', 'bg-white/30');
+                }
+            });
+        };
+
+        const startAutoPlay = () => {
+            if (slideInterval) clearInterval(slideInterval);
+            slideInterval = setInterval(() => {
+                showSlide(currentSlide + 1);
+            }, autoPlayDelay);
+        };
+
+        const pauseAutoPlay = () => {
+            if (slideInterval) clearInterval(slideInterval);
+        };
+
+        // Navigation button listeners
+        if (prevBtn) {
+            prevBtn.addEventListener('click', () => {
+                showSlide(currentSlide - 1);
+                startAutoPlay(); // Restart timer
+            });
+        }
+
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => {
+                showSlide(currentSlide + 1);
+                startAutoPlay(); // Restart timer
+            });
+        }
+
+        // Dot button listeners
+        dots.forEach((dot) => {
+            dot.addEventListener('click', (e) => {
+                const target = parseInt(e.currentTarget.getAttribute('data-target') || '0', 10);
+                showSlide(target);
+                startAutoPlay();
+            });
+        });
+
+        // Hover pause / resume
+        if (container) {
+            container.addEventListener('mouseenter', pauseAutoPlay);
+            container.addEventListener('mouseleave', startAutoPlay);
+            
+            // Touch swipe support on mobile
+            let touchStartX = 0;
+            let touchEndX = 0;
+
+            container.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+                pauseAutoPlay();
+            }, { passive: true });
+
+            container.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                if (touchStartX - touchEndX > 45) {
+                    // Swiped left -> Next
+                    showSlide(currentSlide + 1);
+                } else if (touchEndX - touchStartX > 45) {
+                    // Swiped right -> Prev
+                    showSlide(currentSlide - 1);
+                }
+                startAutoPlay();
+            }, { passive: true });
+        }
+
+        // Initialize first slide and start auto-play
+        showSlide(0);
+        startAutoPlay();
     }
 
     // 4. ANIMATIONS
@@ -96,28 +178,28 @@ document.addEventListener('DOMContentLoaded', () => {
         if (document.querySelector('.hero-bg')) {
             const tl = gsap.timeline();
             tl.fromTo('.hero-bg', 
-                { scale: 1.1, opacity: 0 }, 
+                { scale: 1.05, opacity: 0 }, 
                 { scale: 1, opacity: 1, duration: 0.8, ease: 'power3.out' }
             )
             .fromTo('.animate-on-load > *', 
-                { y: 30, opacity: 0 },
-                { y: 0, opacity: 1, duration: 0.5, stagger: 0.2, ease: 'power2.out' },
-                "-=1"
+                { y: 25, opacity: 0 },
+                { y: 0, opacity: 1, duration: 0.5, stagger: 0.15, ease: 'power2.out' },
+                "-=0.5"
             );
         }
 
         const revealElements = document.querySelectorAll('.gs-reveal');
         revealElements.forEach(elem => {
             gsap.fromTo(elem, 
-                { y: 50, opacity: 0 },
+                { y: 40, opacity: 0 },
                 {
                     y: 0, 
                     opacity: 1,
-                    duration: 0.5,
+                    duration: 0.6,
                     ease: 'power3.out',
                     scrollTrigger: {
                         trigger: elem,
-                        start: 'top 95%',
+                        start: 'top 92%',
                         toggleActions: 'play none none reverse'
                     }
                 }
@@ -125,49 +207,5 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     } catch (e) {
         console.error("GSAP Error:", e);
-    }
-});
-
-// --- Catalog Filter Logic ---
-document.addEventListener('DOMContentLoaded', () => {
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    const propertyCards = document.querySelectorAll('.property-card');
-    
-    if(filterBtns.length > 0) {
-        // Tag cards based on comments for simplicity
-        propertyCards.forEach(card => {
-            const html = card.innerHTML;
-            if(html.includes('DATA:casa')) card.dataset.type = (card.dataset.type || '') + ' casa';
-            if(html.includes('DATA:apartamento')) card.dataset.type = (card.dataset.type || '') + ' apartamento';
-            if(html.includes('DATA:lote')) card.dataset.type = (card.dataset.type || '') + ' lote';
-            if(html.includes('DATA:venta') || html.includes('En Venta')) card.dataset.type = (card.dataset.type || '') + ' venta';
-        });
-
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                // Update active state
-                filterBtns.forEach(b => {
-                    b.classList.remove('bg-gave-primary', 'text-white');
-                    b.classList.add('bg-white', 'text-gray-700');
-                });
-                btn.classList.remove('bg-white', 'text-gray-700');
-                btn.classList.add('bg-gave-primary', 'text-white');
-                
-                const filterValue = btn.getAttribute('data-filter');
-                
-                propertyCards.forEach(card => {
-                    if (filterValue === 'all') {
-                        card.style.display = 'block';
-                    } else {
-                        const types = card.dataset.type || '';
-                        if (types.includes(filterValue)) {
-                            card.style.display = 'block';
-                        } else {
-                            card.style.display = 'none';
-                        }
-                    }
-                });
-            });
-        });
     }
 });
