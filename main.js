@@ -1,4 +1,7 @@
 import './style.css';
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import TeamPhotoCarousel from './src/components/TeamPhotoCarousel.jsx';
 import { createIcons } from 'lucide';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -12,9 +15,25 @@ try {
     console.error("Lucide error:", e);
 }
 
-// Ensure execution happens after DOM is ready
+// Function to mount React carousel immediately or on DOMContentLoaded
+function initReactCarousel() {
+    const reactMount = document.getElementById('react-team-carousel');
+    if (reactMount && !reactMount.dataset.mounted) {
+        reactMount.dataset.mounted = "true";
+        const root = ReactDOM.createRoot(reactMount);
+        root.render(<TeamPhotoCarousel autoPlayInterval={3500} transitionDuration={800} />);
+    }
+}
+
+// Run immediately if DOM ready, otherwise on event
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initReactCarousel);
+} else {
+    initReactCarousel();
+}
+
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. MOBILE MENU LOGIC (Vanilla, foolproof)
+    // 1. MOBILE MENU LOGIC
     const mobileBtn = document.getElementById('mobile-menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
     const navLinks = document.querySelectorAll('.mobile-link');
@@ -25,17 +44,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const isOpen = !mobileMenu.classList.contains('translate-x-full');
             
             if (isOpen) {
-                // Close
                 mobileMenu.classList.add('translate-x-full');
                 document.body.style.overflow = '';
             } else {
-                // Open
                 mobileMenu.classList.remove('translate-x-full');
                 document.body.style.overflow = 'hidden';
             }
         });
         
-        // Close on link click
         navLinks.forEach(link => {
             link.addEventListener('click', () => {
                 mobileMenu.classList.add('translate-x-full');
@@ -53,127 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', updateNavbar);
     updateNavbar();
 
-    // 3. MODERN INTERACTIVE TEAM CAROUSEL (Auto-play + Manual Controls)
-    const slides = document.querySelectorAll('.team-slide');
-    const dots = document.querySelectorAll('.team-dot');
-    const prevBtn = document.getElementById('team-prev-btn');
-    const nextBtn = document.getElementById('team-next-btn');
-    const container = document.getElementById('team-carousel-container');
-
-    if (slides.length > 0) {
-        let currentSlide = 0;
-        let slideInterval = null;
-        const totalSlides = slides.length;
-        const autoPlayDelay = 4000; // 4 seconds
-
-        const showSlide = (index) => {
-            // Handle bounds
-            let targetIndex = index;
-            if (targetIndex >= totalSlides) targetIndex = 0;
-            if (targetIndex < 0) targetIndex = totalSlides - 1;
-
-            currentSlide = targetIndex;
-
-            slides.forEach((slide, idx) => {
-                if (idx === targetIndex) {
-                    slide.classList.remove('hidden');
-                    // Trigger fade & slight transform
-                    requestAnimationFrame(() => {
-                        slide.classList.remove('opacity-0', 'translate-x-4');
-                        slide.classList.add('opacity-100', 'translate-x-0');
-                    });
-                } else {
-                    slide.classList.remove('opacity-100', 'translate-x-0');
-                    slide.classList.add('opacity-0', 'translate-x-4');
-                    // Hide after transition
-                    setTimeout(() => {
-                        if (currentSlide !== idx) {
-                            slide.classList.add('hidden');
-                        }
-                    }, 300);
-                }
-            });
-
-            // Update dot pill indicators
-            dots.forEach((dot, idx) => {
-                if (idx === targetIndex) {
-                    dot.classList.remove('w-2.5', 'bg-white/30');
-                    dot.classList.add('w-8', 'bg-gave-secondary', 'shadow-sm', 'shadow-emerald-500/30');
-                } else {
-                    dot.classList.remove('w-8', 'bg-gave-secondary', 'shadow-sm', 'shadow-emerald-500/30');
-                    dot.classList.add('w-2.5', 'bg-white/30');
-                }
-            });
-        };
-
-        const startAutoPlay = () => {
-            if (slideInterval) clearInterval(slideInterval);
-            slideInterval = setInterval(() => {
-                showSlide(currentSlide + 1);
-            }, autoPlayDelay);
-        };
-
-        const pauseAutoPlay = () => {
-            if (slideInterval) clearInterval(slideInterval);
-        };
-
-        // Navigation button listeners
-        if (prevBtn) {
-            prevBtn.addEventListener('click', () => {
-                showSlide(currentSlide - 1);
-                startAutoPlay(); // Restart timer
-            });
-        }
-
-        if (nextBtn) {
-            nextBtn.addEventListener('click', () => {
-                showSlide(currentSlide + 1);
-                startAutoPlay(); // Restart timer
-            });
-        }
-
-        // Dot button listeners
-        dots.forEach((dot) => {
-            dot.addEventListener('click', (e) => {
-                const target = parseInt(e.currentTarget.getAttribute('data-target') || '0', 10);
-                showSlide(target);
-                startAutoPlay();
-            });
-        });
-
-        // Hover pause / resume
-        if (container) {
-            container.addEventListener('mouseenter', pauseAutoPlay);
-            container.addEventListener('mouseleave', startAutoPlay);
-            
-            // Touch swipe support on mobile
-            let touchStartX = 0;
-            let touchEndX = 0;
-
-            container.addEventListener('touchstart', (e) => {
-                touchStartX = e.changedTouches[0].screenX;
-                pauseAutoPlay();
-            }, { passive: true });
-
-            container.addEventListener('touchend', (e) => {
-                touchEndX = e.changedTouches[0].screenX;
-                if (touchStartX - touchEndX > 45) {
-                    // Swiped left -> Next
-                    showSlide(currentSlide + 1);
-                } else if (touchEndX - touchStartX > 45) {
-                    // Swiped right -> Prev
-                    showSlide(currentSlide - 1);
-                }
-                startAutoPlay();
-            }, { passive: true });
-        }
-
-        // Initialize first slide and start auto-play
-        showSlide(0);
-        startAutoPlay();
-    }
-
-    // 4. ANIMATIONS
+    // 3. ANIMATIONS
     try {
         if (document.querySelector('.hero-bg')) {
             const tl = gsap.timeline();

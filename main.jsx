@@ -15,14 +15,24 @@ try {
     console.error("Lucide error:", e);
 }
 
-// Mount React Carousel in the #react-team-carousel mount point
-document.addEventListener('DOMContentLoaded', () => {
+// Function to mount React carousel immediately or on DOMContentLoaded
+function initReactCarousel() {
     const reactMount = document.getElementById('react-team-carousel');
-    if (reactMount) {
+    if (reactMount && !reactMount.dataset.mounted) {
+        reactMount.dataset.mounted = "true";
         const root = ReactDOM.createRoot(reactMount);
-        root.render(<TeamPhotoCarousel autoPlayInterval={4000} transitionDuration={800} />);
+        root.render(<TeamPhotoCarousel autoPlayInterval={3500} transitionDuration={800} />);
     }
+}
 
+// Run immediately if DOM ready, otherwise on event
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initReactCarousel);
+} else {
+    initReactCarousel();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
     // 1. MOBILE MENU LOGIC
     const mobileBtn = document.getElementById('mobile-menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
