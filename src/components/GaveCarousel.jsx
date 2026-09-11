@@ -5,21 +5,13 @@ import './Carousel.css';
 const GAVE_ITEMS = [
   {
     id: 1,
-    title: 'Consultoría Comercial & Valoración',
-    subtitle: 'Asesora Inmobiliaria Senior',
-    description: 'Especialista en negociación estratégica y estudio de mercado para maximizar tu inversión en Colombia.',
     image: '/img-asesora-1.png',
-    alt: 'Asesora Comercial - Gave Propiedades',
-    tag: 'Gave 1 a 1'
+    alt: 'Asesora Inmobiliaria 1 - Gave Propiedades'
   },
   {
     id: 2,
-    title: 'Acompañamiento Legal & Normativo',
-    subtitle: 'Asesora Jurídica & Estructural',
-    description: 'Experta en análisis de títulos, contratos notariales y blindaje jurídico de tu patrimonio sin anticipos.',
     image: '/img-asesora-2.png',
-    alt: 'Asesora Jurídica - Gave Propiedades',
-    tag: 'Seguridad Legal'
+    alt: 'Asesora Inmobiliaria 2 - Gave Propiedades'
   }
 ];
 
@@ -39,44 +31,27 @@ function CarouselItem({ item, index, itemWidth, round, trackItemOffset, x, trans
       className={`carousel-item ${round ? 'round' : ''}`}
       style={{
         width: itemWidth,
-        height: round ? itemWidth : 430,
+        height: round ? itemWidth : 440,
         rotateY: rotateY,
         ...(round && { borderRadius: '50%' })
       }}
       transition={transition}
     >
-      {/* Background Photo */}
       <img src={item.image} alt={item.alt} className="carousel-photo-bg" />
-      <div className="carousel-photo-overlay" />
-
-      {/* Top Tag Header */}
-      <div className="carousel-item-header">
-        <span className="carousel-tag-container">
-          <span className="carousel-tag-dot"></span>
-          {item.tag}
-        </span>
-      </div>
-
-      {/* Bottom Content Card with frosted glass */}
-      <div className="carousel-item-content">
-        <div className="carousel-item-subtitle">{item.subtitle}</div>
-        <div className="carousel-item-title">{item.title}</div>
-        <p className="carousel-item-description">{item.description}</p>
-      </div>
     </motion.div>
   );
 }
 
 export default function GaveCarousel({
   items = GAVE_ITEMS,
-  baseWidth = 380,
+  baseWidth = 360,
   autoplay = true,
   autoplayDelay = 3500,
   pauseOnHover = true,
   loop = true,
   round = false
 }) {
-  const containerPadding = 16;
+  const containerPadding = 12;
   const itemWidth = baseWidth - containerPadding * 2;
   const trackItemOffset = itemWidth + GAP;
   const itemsForRender = useMemo(() => {
@@ -257,7 +232,7 @@ export default function GaveCarousel({
             type="button"
             className="carousel-arrow-btn"
             onClick={handlePrev}
-            aria-label="Anterior asesora"
+            aria-label="Foto anterior"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <path d="m15 18-6-6 6-6" />
@@ -271,7 +246,7 @@ export default function GaveCarousel({
                 type="button"
                 key={index}
                 className={`carousel-indicator ${activeIndex === index ? 'active' : 'inactive'}`}
-                aria-label={`Ir a asesora ${index + 1}`}
+                aria-label={`Ir a foto ${index + 1}`}
                 aria-current={activeIndex === index}
                 animate={{
                   scale: activeIndex === index ? 1.05 : 1
@@ -287,7 +262,7 @@ export default function GaveCarousel({
             type="button"
             className="carousel-arrow-btn"
             onClick={handleNext}
-            aria-label="Siguiente asesora"
+            aria-label="Siguiente foto"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <path d="m9 18 6-6-6-6" />
