@@ -20,7 +20,9 @@ export const properties = [
     permuta: 'No',
     sector: 'Las Américas',
     enConjunto: 'No',
+    mapEmbedUrl: 'https://maps.google.com/maps?q=Barrio+Las+Americas+Armenia+Quindio+Colombia&t=&z=15&ie=UTF8&iwloc=&output=embed',
     videoUrl: 'https://drive.google.com/open?id=1dtWe3FSP2A5peNauQ7B9LmWcuhmELZzt',
+    videoEmbedUrl: 'https://drive.google.com/file/d/1dtWe3FSP2A5peNauQ7B9LmWcuhmELZzt/preview',
     description: 'Hermosa casa de 2 niveles ubicada en el prestigioso y tranquilo sector de Las Américas en Armenia, Quindío. La propiedad cuenta con sala espaciosa, comedor independiente, cocina integral, 3 cómodas habitaciones, 3 baños completos, zona de ropas, patio privado y parqueadero cubierto para 2 vehículos. Sector de alta valorización con vías pavimentadas y excelente conectividad.',
     mainImg: '/properties/ref-007/foto_4.jpg',
     images: [
@@ -72,6 +74,7 @@ export const properties = [
     permuta: 'No',
     sector: 'Zona Norte',
     enConjunto: 'Sí',
+    mapEmbedUrl: 'https://maps.google.com/maps?q=Usaquen+Bogota+Colombia&t=&z=14&ie=UTF8&iwloc=&output=embed',
     description: 'Hermosa casa moderna ubicada en exclusivo sector del norte de Bogotá. Cuenta con amplios espacios iluminados naturalmente, cocina tipo americano con acabados de lujo, sala comedor integrados, jardín privado, estudio y zona de ropas independiente. Conjunto cerrado con vigilancia 24/7 y excelentes zonas comunes.',
     mainImg: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
     images: [
@@ -102,6 +105,7 @@ export const properties = [
     permuta: 'No',
     sector: 'El Poblado',
     enConjunto: 'Sí',
+    mapEmbedUrl: 'https://maps.google.com/maps?q=El+Poblado+Medellin+Colombia&t=&z=14&ie=UTF8&iwloc=&output=embed',
     description: 'Espectacular apartamento en piso alto con vista ininterrumpida a las montañas de Medellín. Diseño contemporáneo de concepto abierto, balcón panorámico amplio, acabados premium y cocina integral equipada. Edificio con amenidades de club house.',
     mainImg: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
     images: [
@@ -132,6 +136,7 @@ export const properties = [
     permuta: 'Sí',
     sector: 'Campestre',
     enConjunto: 'Sí',
+    mapEmbedUrl: 'https://maps.google.com/maps?q=Quimbaya+Quindio+Colombia&t=&z=13&ie=UTF8&iwloc=&output=embed',
     description: 'Terreno campestre con topografía ideal y clima templado en el corazón del Eje Cafetero. Ubicado en parcelación campestre de alta categoría con vías pavimentadas, acueducto propio, red eléctrica subterránea y vista privilegiada al paisaje cafetero.',
     mainImg: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
     images: [
@@ -159,8 +164,9 @@ export const properties = [
     antiguedad: '1 a 8 años',
     remodelado: 'Sí',
     permuta: 'No',
-    sector: 'Norte',
+    sector: 'Altos de Riomar',
     enConjunto: 'Sí',
+    mapEmbedUrl: 'https://maps.google.com/maps?q=Altos+de+Riomar+Barranquilla+Colombia&t=&z=14&ie=UTF8&iwloc=&output=embed',
     description: 'Exclusivo apartamento en el sector más cotizado de Barranquilla. Gran terraza con vista a la brisa caribeña, acabados en porcelanato, iluminación LED inteligente y alcoba principal con vestier y baño privado.',
     mainImg: 'https://images.unsplash.com/photo-1512915922686-57c11dde9b6b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
     images: [
@@ -188,8 +194,9 @@ export const properties = [
     antiguedad: '9 a 15 años',
     remodelado: 'Sí',
     permuta: 'Sí',
-    sector: 'Pance',
+    sector: 'Ciudad Jardín / Pance',
     enConjunto: 'Sí',
+    mapEmbedUrl: 'https://maps.google.com/maps?q=Ciudad+Jardin+Cali+Colombia&t=&z=14&ie=UTF8&iwloc=&output=embed',
     description: 'Imponente casa familiar en condominio campestre en Cali. Amplios jardines internos, zona BBQ techada, 4 cómodas habitaciones, sala de estar independiente y acabados en madera maciza restaurada.',
     mainImg: 'https://images.unsplash.com/photo-1449844908441-8829872d2607?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
     images: [
@@ -217,8 +224,9 @@ export const properties = [
     antiguedad: 'A estrenar',
     remodelado: 'No',
     permuta: 'No',
-    sector: 'Cabecera',
+    sector: 'Cabecera del Llano',
     enConjunto: 'Sí',
+    mapEmbedUrl: 'https://maps.google.com/maps?q=Cabecera+del+Llano+Bucaramanga+Colombia&t=&z=14&ie=UTF8&iwloc=&output=embed',
     description: 'Apartamento moderno tipo loft a estrenar. Ideal para inversionistas o jóvenes profesionales. Excelente iluminación, balcón privado y acceso a terraza comunitaria con vista 360 grados.',
     mainImg: 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
     images: [

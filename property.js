@@ -70,18 +70,29 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
     `).join('');
 
-    const videoSectionHtml = property.videoUrl ? `
+    // Video Section with Interactive Lightbox trigger
+    const videoSectionHtml = property.videoEmbedUrl ? `
       <div class="bg-white p-6 md:p-8 rounded-3xl shadow-sm border border-gray-100">
-        <h2 class="text-2xl font-bold text-gave-primary mb-4 flex items-center gap-3">
+        <h2 class="text-2xl font-bold text-gave-primary mb-2 flex items-center gap-3">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gave-secondary"><polygon points="23 7 16 12 23 17 23 7"/><rect width="15" height="14" x="1" y="5" rx="2" ry="2"/></svg>
           Video Tour del Inmueble
         </h2>
-        <p class="text-gray-600 mb-6 text-sm">Explora el recorrido guiado en video de esta propiedad.</p>
-        <div class="flex items-center gap-4">
-          <a href="${property.videoUrl}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-3 px-8 py-4 bg-gave-primary hover:bg-gave-secondary text-white font-bold rounded-2xl transition-all shadow-md transform hover:-translate-y-0.5">
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-            Ver Video Completo en Google Drive
-          </a>
+        <p class="text-gray-600 mb-6 text-sm">Haz clic para abrir el recorrido virtual interactivo en alta definición.</p>
+        
+        <!-- Video Preview Card with Lightbox Trigger -->
+        <div 
+          id="open-video-lightbox"
+          class="relative w-full aspect-video md:aspect-[21/9] rounded-2xl overflow-hidden shadow-lg bg-gray-900 group cursor-pointer border-2 border-gave-primary/20 hover:border-gave-secondary transition-all"
+        >
+          <img src="${property.mainImg}" alt="Vista previa Video Tour" class="w-full h-full object-cover opacity-60 group-hover:opacity-40 group-hover:scale-105 transition-all duration-500" />
+          
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex flex-col items-center justify-center p-6 text-center">
+            <div class="w-16 h-16 md:w-20 md:h-20 rounded-full bg-gave-secondary text-white flex items-center justify-center shadow-2xl group-hover:scale-110 active:scale-95 transition-transform duration-300">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="currentColor" class="ml-1"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </div>
+            <p class="mt-4 text-white font-extrabold text-lg md:text-xl drop-shadow-md">Reproducir Video Tour</p>
+            <span class="mt-1 text-xs text-white/80 font-medium px-3 py-1 bg-white/20 rounded-full backdrop-blur-sm">Abrir en Lightbox</span>
+          </div>
         </div>
       </div>
     ` : '';
@@ -222,7 +233,7 @@ document.addEventListener('DOMContentLoaded', () => {
               </ul>
             </div>
 
-            <!-- Ubicación con Mapa Circular (Requerimiento) -->
+            <!-- Ubicación con Mapa Circular Específico -->
             <div class="bg-white p-8 rounded-3xl shadow-sm border border-gray-100">
               <div class="flex items-center justify-between mb-6">
                 <div>
@@ -233,7 +244,7 @@ document.addEventListener('DOMContentLoaded', () => {
               
               <div class="relative w-full aspect-video rounded-2xl overflow-hidden bg-gray-200 shadow-inner">
                 <iframe 
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1m2!1m1!1s0x8e38f5e1f7a2fb09%3A0xb35a82fa2f93aa6a!2sArmenia%2C%20Quindio%2C%20Colombia!5e0!3m2!1sen!2s!4v1700000000000!5m2!1sen!2s" 
+                  src="${property.mapEmbedUrl || `https://maps.google.com/maps?q=${encodeURIComponent(property.location)}&t=&z=14&ie=UTF8&iwloc=&output=embed`}" 
                   width="100%" 
                   height="100%" 
                   style="border:0;" 
@@ -306,7 +317,81 @@ document.addEventListener('DOMContentLoaded', () => {
 
         </div>
       </div>
+
+      <!-- Video Lightbox Modal -->
+      ${property.videoEmbedUrl ? `
+        <div id="video-lightbox-modal" class="fixed inset-0 z-[99999] bg-black/90 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 opacity-0 pointer-events-none transition-opacity duration-300">
+          <div class="relative w-full max-w-4xl bg-black rounded-3xl overflow-hidden shadow-2xl border border-white/20 transform scale-95 transition-transform duration-300" id="video-modal-content">
+            <!-- Close Button -->
+            <button id="close-video-lightbox" class="absolute top-4 right-4 z-50 w-11 h-11 rounded-full bg-black/60 hover:bg-gave-secondary text-white border border-white/20 flex items-center justify-center transition-all cursor-pointer" aria-label="Cerrar video">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+            
+            <div class="relative w-full aspect-video bg-black">
+              <iframe 
+                id="lightbox-iframe"
+                src=""
+                data-src="${property.videoEmbedUrl}"
+                class="w-full h-full border-0" 
+                allow="autoplay; encrypted-media; fullscreen" 
+                allowfullscreen>
+              </iframe>
+            </div>
+            
+            <div class="p-4 bg-gray-900 border-t border-white/10 flex items-center justify-between text-white text-sm">
+              <p class="font-bold">${property.title}</p>
+              <a href="${property.videoUrl}" target="_blank" class="text-xs text-gave-secondary hover:underline">Abrir enlace externo ↗</a>
+            </div>
+          </div>
+        </div>
+      ` : ''}
     `;
 
     mainContainer.innerHTML = propertyHtml;
+
+    // Lightbox open/close event listeners
+    if (property.videoEmbedUrl) {
+      const openBtn = document.getElementById('open-video-lightbox');
+      const closeBtn = document.getElementById('close-video-lightbox');
+      const modal = document.getElementById('video-lightbox-modal');
+      const modalContent = document.getElementById('video-modal-content');
+      const iframe = document.getElementById('lightbox-iframe');
+
+      const openModal = () => {
+        if (!modal || !iframe) return;
+        iframe.src = iframe.getAttribute('data-src');
+        modal.classList.remove('opacity-0', 'pointer-events-none');
+        modal.classList.add('opacity-100', 'pointer-events-auto');
+        if (modalContent) {
+          modalContent.classList.remove('scale-95');
+          modalContent.classList.add('scale-100');
+        }
+        document.body.style.overflow = 'hidden';
+      };
+
+      const closeModal = () => {
+        if (!modal || !iframe) return;
+        iframe.src = '';
+        modal.classList.remove('opacity-100', 'pointer-events-auto');
+        modal.classList.add('opacity-0', 'pointer-events-none');
+        if (modalContent) {
+          modalContent.classList.remove('scale-100');
+          modalContent.classList.add('scale-95');
+        }
+        document.body.style.overflow = '';
+      };
+
+      if (openBtn) openBtn.addEventListener('click', openModal);
+      if (closeBtn) closeBtn.addEventListener('click', closeModal);
+      if (modal) {
+        modal.addEventListener('click', (e) => {
+          if (e.target === modal) closeModal();
+        });
+      }
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal && !modal.classList.contains('opacity-0')) {
+          closeModal();
+        }
+      });
+    }
 });
