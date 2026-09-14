@@ -1,7 +1,10 @@
 import './style.css';
+import 'leaflet/dist/leaflet.css';
+import L from 'leaflet';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import GaveCarousel from './src/components/GaveCarousel.jsx';
+import { properties } from './data.js';
 import { createIcons } from 'lucide';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -38,10 +41,85 @@ function initReactCarousel() {
     }
 }
 
+// Function to initialize Coverage Leaflet Map on Home Page
+function initHomeCoverageMap() {
+    const mapEl = document.getElementById('home-coverage-map');
+    if (mapEl && !mapEl.dataset.initialized) {
+        mapEl.dataset.initialized = "true";
+        try {
+            // Center of Colombia / Eje Cafetero region
+            const map = L.map('home-coverage-map', {
+                center: [4.8, -74.8],
+                zoom: 6,
+                zoomControl: true,
+                scrollWheelZoom: false
+            });
+
+            // Clean Voyager tiles from CartoDB / OSM
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+                subdomains: 'abcd',
+                maxZoom: 18
+            }).addTo(map);
+
+            // Add all active properties zones fixed to real coordinates
+            properties.forEach(prop => {
+                if (prop.lat && prop.lng) {
+                    // Fixed geographic circle on map
+                    L.circle([prop.lat, prop.lng], {
+                        color: '#3E7751',
+                        fillColor: '#3E7751',
+                        fillOpacity: 0.25,
+                        weight: 2,
+                        radius: (prop.zoneRadius || 400) * 12, // scaled for country/region view
+                        dashArray: '5, 5'
+                    }).addTo(map);
+
+                    // Custom pulsing pin marker
+                    const pinIcon = L.divIcon({
+                        className: 'home-map-pin',
+                        html: `
+                            <div style="position: relative; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+                                <div style="position: absolute; inset: 0; border-radius: 50%; background: rgba(62, 119, 81, 0.45); animation: ping 2.5s cubic-bezier(0, 0, 0.2, 1) infinite;"></div>
+                                <div style="position: relative; width: 28px; height: 28px; border-radius: 50%; background: #00375D; border: 2px solid #FFFFFF; box-shadow: 0 4px 10px rgba(0,0,0,0.35); display: flex; align-items: center; justify-content: center; color: #FFFFFF;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                                </div>
+                            </div>
+                        `,
+                        iconSize: [32, 32],
+                        iconAnchor: [16, 16]
+                    });
+
+                    const marker = L.marker([prop.lat, prop.lng], { icon: pinIcon }).addTo(map);
+                    
+                    marker.bindPopup(`
+                        <div style="font-family: Inter, sans-serif; padding: 4px; color: #00375D; min-width: 140px;">
+                            <strong style="font-size: 12px; display: block; margin-bottom: 2px;">${prop.title}</strong>
+                            <span style="font-size: 11px; color: #3E7751; font-weight: 600;">${prop.location}</span>
+                            <a href="/property.html?id=${prop.id}" style="display: block; margin-top: 6px; font-size: 11px; color: #00375D; font-weight: 700; text-decoration: underline;">Ver propiedad →</a>
+                        </div>
+                    `);
+                }
+            });
+
+            setTimeout(() => {
+                map.invalidateSize();
+            }, 300);
+
+        } catch (e) {
+            console.error("Home Leaflet map error:", e);
+        }
+    }
+}
+
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initReactCarousel);
+    document.addEventListener('DOMContentLoaded', () => {
+        initReactCarousel();
+        initHomeCoverageMap();
+    });
 } else {
     initReactCarousel();
+    initHomeCoverageMap();
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -56,9 +134,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const isOpen = !mobileMenu.classList.contains('translate-x-full');
             
             if (isOpen) {
+                // Close
                 mobileMenu.classList.add('translate-x-full');
                 document.body.style.overflow = '';
             } else {
+                // Open
                 mobileMenu.classList.remove('translate-x-full');
                 document.body.style.overflow = 'hidden';
             }

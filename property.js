@@ -157,16 +157,28 @@ document.addEventListener('DOMContentLoaded', () => {
           <!-- LEFT COLUMN: Gallery & Details -->
           <div class="lg:col-span-2 space-y-10">
             
-            <!-- Interactive Gallery with Arrow Navigation -->
+            <!-- Interactive Gallery with Arrow Navigation & Lightbox on Click -->
             <div class="flex flex-col gap-4">
               <!-- Main Image Container with Prev/Next Navigation Buttons -->
-              <div class="relative w-full aspect-[4/3] md:aspect-[16/10] rounded-3xl overflow-hidden shadow-lg bg-gray-900 group select-none">
+              <div 
+                id="main-img-wrapper"
+                class="relative w-full aspect-[4/3] md:aspect-[16/10] rounded-3xl overflow-hidden shadow-lg bg-gray-900 group select-none cursor-zoom-in"
+                title="Haz clic para ver en pantalla completa"
+              >
                 <img 
                   id="main-property-img" 
                   src="${property.mainImg}" 
                   alt="${property.title}" 
-                  class="w-full h-full object-cover transition-all duration-300"
+                  class="w-full h-full object-cover transition-all duration-300 group-hover:scale-102"
                 >
+
+                <!-- Zoom In Overlay Hint on Hover -->
+                <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none flex items-center justify-center">
+                  <span class="px-4 py-2 bg-black/60 backdrop-blur-md border border-white/20 text-white rounded-full text-xs font-bold flex items-center gap-2 shadow-xl">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                    Ver foto completa
+                  </span>
+                </div>
 
                 <!-- Left Arrow (Prev) -->
                 <button
@@ -320,7 +332,7 @@ document.addEventListener('DOMContentLoaded', () => {
                   Zona señalada: ${property.sector || property.location.split(',')[0]}
                 </div>
               </div>
-              <p class="text-xs text-gray-400 mt-3 text-center italic">* El círculo verde representa la zona aproximada del inmueble en el mapa interactivo (puedes hacer zoom y desplazar el mapa libremente manteniendo la zona fija en sus coordenadas geográficas exactas).</p>
+              <p class="text-xs text-gray-400 mt-3 text-center italic">* El círculo verde representa la zona aproximada del inmueble en el mapa interactivo (puedes hacer zoom y desplazar el mapa libremente manteniendo la zona fija en sus coordenadas geográficas exactas con Leaflet + OpenStreetMap).</p>
             </div>
 
           </div>
@@ -378,6 +390,85 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
       </div>
 
+      <!-- IMAGE LIGHTBOX MODAL (Interactive Fullscreen Gallery) -->
+      <div 
+        id="image-lightbox-modal" 
+        class="fixed inset-0 z-[99999] bg-black/95 backdrop-blur-lg flex items-center justify-center p-2 sm:p-4 md:p-8 opacity-0 pointer-events-none transition-opacity duration-300 select-none"
+      >
+        <!-- Modal Container -->
+        <div class="relative w-full max-w-6xl h-full max-h-[92vh] flex flex-col justify-between">
+          
+          <!-- Modal Top Bar -->
+          <div class="flex items-center justify-between p-3 px-6 bg-gray-900/80 backdrop-blur-md rounded-2xl border border-white/10 text-white z-30">
+            <div class="flex items-center gap-3">
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+              <span class="font-bold text-sm md:text-base line-clamp-1">${property.title}</span>
+            </div>
+            <div class="flex items-center gap-4">
+              <span id="lightbox-counter" class="text-xs font-bold text-white/80 bg-white/10 px-3 py-1 rounded-full">1 / ${allGalleryImages.length}</span>
+              <button 
+                id="close-image-lightbox" 
+                class="w-9 h-9 rounded-full bg-white/10 hover:bg-red-500 text-white flex items-center justify-center transition-colors cursor-pointer text-base font-bold shadow-md"
+                aria-label="Cerrar galería"
+              >
+                ✕
+              </button>
+            </div>
+          </div>
+
+          <!-- Main Lightbox Image View with Nav Buttons -->
+          <div class="relative flex-1 flex items-center justify-center my-3 overflow-hidden">
+            <!-- Left Arrow -->
+            <button 
+              id="lightbox-prev-btn"
+              type="button" 
+              class="absolute left-2 sm:left-4 z-40 w-12 h-12 rounded-full bg-black/60 hover:bg-[#3E7751] text-white backdrop-blur-md border border-white/20 flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer shadow-2xl"
+              aria-label="Foto anterior"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m15 18-6-6 6-6"/>
+              </svg>
+            </button>
+
+            <!-- Image Target -->
+            <img 
+              id="lightbox-current-img" 
+              src="${property.mainImg}" 
+              alt="${property.title}" 
+              class="max-w-full max-h-[75vh] object-contain rounded-2xl shadow-2xl transition-all duration-300"
+            >
+
+            <!-- Right Arrow -->
+            <button 
+              id="lightbox-next-btn"
+              type="button" 
+              class="absolute right-2 sm:right-4 z-40 w-12 h-12 rounded-full bg-black/60 hover:bg-[#3E7751] text-white backdrop-blur-md border border-white/20 flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer shadow-2xl"
+              aria-label="Foto siguiente"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m9 18 6-6-6-6"/>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Modal Bottom Bar (Thumbnails strip in modal) -->
+          <div class="flex items-center justify-center gap-2 overflow-x-auto py-2 px-4 bg-gray-900/80 backdrop-blur-md rounded-2xl border border-white/10 scrollbar-none z-30">
+            ${allGalleryImages.map((imgUrl, idx) => `
+              <button 
+                type="button" 
+                data-lightbox-index="${idx}"
+                class="lightbox-thumb w-14 h-14 flex-shrink-0 rounded-xl overflow-hidden border-2 transition-all p-0 cursor-pointer ${
+                  idx === 0 ? 'border-[#3E7751] ring-2 ring-[#3E7751]/40 scale-105' : 'border-transparent opacity-60 hover:opacity-100'
+                }"
+              >
+                <img src="${imgUrl}" alt="Miniatura ${idx + 1}" class="w-full h-full object-cover">
+              </button>
+            `).join('')}
+          </div>
+
+        </div>
+      </div>
+
       <!-- Video Lightbox Modal (Full HD Interactive Embed) -->
       ${property.videoEmbedUrl ? `
         <div 
@@ -427,13 +518,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
     mainContainer.innerHTML = propertyHtml;
 
-    // --- Interactive Gallery Logic with Arrow Buttons and Green Border Highlight ---
+    // --- Interactive Gallery Logic with Arrow Buttons, Lightbox on Click, and Green Border Highlight ---
     let currentPhotoIndex = 0;
     const mainImgEl = document.getElementById('main-property-img');
+    const mainImgWrapper = document.getElementById('main-img-wrapper');
     const counterEl = document.getElementById('gallery-counter');
     const prevBtn = document.getElementById('gallery-prev-btn');
     const nextBtn = document.getElementById('gallery-next-btn');
     const thumbButtons = document.querySelectorAll('.gallery-thumb');
+
+    // Image Lightbox Elements
+    const imgLightboxModal = document.getElementById('image-lightbox-modal');
+    const lightboxImgEl = document.getElementById('lightbox-current-img');
+    const lightboxCounter = document.getElementById('lightbox-counter');
+    const lightboxPrevBtn = document.getElementById('lightbox-prev-btn');
+    const lightboxNextBtn = document.getElementById('lightbox-next-btn');
+    const lightboxCloseBtn = document.getElementById('close-image-lightbox');
+    const lightboxThumbs = document.querySelectorAll('.lightbox-thumb');
 
     const updateGalleryPhoto = (newIndex) => {
       if (!mainImgEl || allGalleryImages.length === 0) return;
@@ -457,29 +558,94 @@ document.addEventListener('DOMContentLoaded', () => {
         mainImgEl.style.transform = 'scale(1)';
       }, 100);
 
-      // Update counter text
+      // Update Lightbox image if open
+      if (lightboxImgEl) {
+        lightboxImgEl.src = allGalleryImages[currentPhotoIndex];
+      }
+
+      // Update counter texts
       if (counterEl) {
         counterEl.textContent = `${currentPhotoIndex + 1} / ${allGalleryImages.length}`;
       }
+      if (lightboxCounter) {
+        lightboxCounter.textContent = `${currentPhotoIndex + 1} / ${allGalleryImages.length}`;
+      }
 
-      // Update thumbnail active styles (Vibrant green border on selected item)
+      // Update page thumbnail active styles (Vibrant green border on selected item)
       thumbButtons.forEach((btn, idx) => {
         if (idx === currentPhotoIndex) {
           btn.classList.remove('border-transparent', 'opacity-80');
           btn.classList.add('border-[#3E7751]', 'ring-4', 'ring-[#3E7751]/30', 'scale-95', 'opacity-100');
-          // Scroll thumbnail into view if needed
           btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
         } else {
-          btn.classList.remove('border-[#3E7751]', 'ring-4', 'ring-[#3E7751]/30', 'scale-95');
+          btn.classList.remove('border-[#3E7751]', 'ring-4', 'ring-[#3E7751]/30', 'scale-95', 'opacity-100');
           btn.classList.add('border-transparent', 'opacity-80');
+        }
+      });
+
+      // Update lightbox strip thumbnails
+      lightboxThumbs.forEach((btn, idx) => {
+        if (idx === currentPhotoIndex) {
+          btn.classList.remove('border-transparent', 'opacity-60');
+          btn.classList.add('border-[#3E7751]', 'ring-2', 'ring-[#3E7751]/40', 'scale-105', 'opacity-100');
+          btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+        } else {
+          btn.classList.remove('border-[#3E7751]', 'ring-2', 'ring-[#3E7751]/40', 'scale-105', 'opacity-100');
+          btn.classList.add('border-transparent', 'opacity-60');
         }
       });
     };
 
-    // Prev/Next Click Event Listeners
+    // --- Lightbox Open & Close handlers ---
+    const openImageLightbox = () => {
+      if (!imgLightboxModal || !lightboxImgEl) return;
+      lightboxImgEl.src = allGalleryImages[currentPhotoIndex];
+      if (lightboxCounter) {
+        lightboxCounter.textContent = `${currentPhotoIndex + 1} / ${allGalleryImages.length}`;
+      }
+      imgLightboxModal.classList.remove('opacity-0', 'pointer-events-none');
+      imgLightboxModal.classList.add('opacity-100', 'pointer-events-auto');
+      document.body.style.overflow = 'hidden';
+    };
+
+    const closeImageLightbox = () => {
+      if (!imgLightboxModal) return;
+      imgLightboxModal.classList.remove('opacity-100', 'pointer-events-auto');
+      imgLightboxModal.classList.add('opacity-0', 'pointer-events-none');
+      document.body.style.overflow = '';
+    };
+
+    // Clicking main image opens fullscreen lightbox
+    if (mainImgWrapper) {
+      mainImgWrapper.addEventListener('click', (e) => {
+        // Prevent opening if clicking on arrow buttons
+        if (e.target.closest('#gallery-prev-btn') || e.target.closest('#gallery-next-btn')) {
+          return;
+        }
+        openImageLightbox();
+      });
+    }
+
+    if (lightboxCloseBtn) {
+      lightboxCloseBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        closeImageLightbox();
+      });
+    }
+
+    if (imgLightboxModal) {
+      imgLightboxModal.addEventListener('click', (e) => {
+        if (e.target === imgLightboxModal) {
+          closeImageLightbox();
+        }
+      });
+    }
+
+    // Prev/Next Click Event Listeners for Page Gallery
     if (prevBtn) {
       prevBtn.addEventListener('click', (e) => {
         e.preventDefault();
+        e.stopPropagation();
         updateGalleryPhoto(currentPhotoIndex - 1);
       });
     }
@@ -487,24 +653,62 @@ document.addEventListener('DOMContentLoaded', () => {
     if (nextBtn) {
       nextBtn.addEventListener('click', (e) => {
         e.preventDefault();
+        e.stopPropagation();
         updateGalleryPhoto(currentPhotoIndex + 1);
       });
     }
 
-    // Thumbnail Click Event Listeners
+    // Prev/Next Click Event Listeners for Lightbox
+    if (lightboxPrevBtn) {
+      lightboxPrevBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        updateGalleryPhoto(currentPhotoIndex - 1);
+      });
+    }
+
+    if (lightboxNextBtn) {
+      lightboxNextBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        updateGalleryPhoto(currentPhotoIndex + 1);
+      });
+    }
+
+    // Thumbnail Click Event Listeners on Page
     thumbButtons.forEach((btn) => {
-      btn.addEventListener('click', () => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
         const idx = parseInt(btn.getAttribute('data-index') || '0', 10);
         updateGalleryPhoto(idx);
       });
     });
 
-    // Keyboard Left/Right Arrow Navigation
+    // Thumbnail Click Event Listeners on Lightbox
+    lightboxThumbs.forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const idx = parseInt(btn.getAttribute('data-lightbox-index') || '0', 10);
+        updateGalleryPhoto(idx);
+      });
+    });
+
+    // Keyboard Left/Right/Escape Navigation
     document.addEventListener('keydown', (e) => {
-      const modal = document.getElementById('video-lightbox-modal');
-      const isModalOpen = modal && !modal.classList.contains('opacity-0');
+      const isImgModalOpen = imgLightboxModal && !imgLightboxModal.classList.contains('opacity-0');
+      const videoModal = document.getElementById('video-lightbox-modal');
+      const isVideoModalOpen = videoModal && !videoModal.classList.contains('opacity-0');
       
-      if (!isModalOpen) {
+      if (isImgModalOpen) {
+        if (e.key === 'Escape') {
+          closeImageLightbox();
+        } else if (e.key === 'ArrowLeft') {
+          updateGalleryPhoto(currentPhotoIndex - 1);
+        } else if (e.key === 'ArrowRight') {
+          updateGalleryPhoto(currentPhotoIndex + 1);
+        }
+      } else if (!isVideoModalOpen) {
         if (e.key === 'ArrowLeft') {
           updateGalleryPhoto(currentPhotoIndex - 1);
         } else if (e.key === 'ArrowRight') {
@@ -513,16 +717,17 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // Swipe gestures on main image for mobile
-    if (mainImgEl) {
+    // Swipe gestures on main image and lightbox for mobile
+    const addSwipeGesture = (element) => {
+      if (!element) return;
       let touchStartX = 0;
       let touchEndX = 0;
       
-      mainImgEl.parentElement.addEventListener('touchstart', (e) => {
+      element.addEventListener('touchstart', (e) => {
         touchStartX = e.changedTouches[0].screenX;
       }, { passive: true });
 
-      mainImgEl.parentElement.addEventListener('touchend', (e) => {
+      element.addEventListener('touchend', (e) => {
         touchEndX = e.changedTouches[0].screenX;
         if (touchStartX - touchEndX > 45) {
           updateGalleryPhoto(currentPhotoIndex + 1); // Swipe left -> next
@@ -530,7 +735,10 @@ document.addEventListener('DOMContentLoaded', () => {
           updateGalleryPhoto(currentPhotoIndex - 1); // Swipe right -> prev
         }
       }, { passive: true });
-    }
+    };
+
+    addSwipeGesture(mainImgWrapper);
+    addSwipeGesture(imgLightboxModal);
 
     // --- Initialize Leaflet Interactive Map with Fixed Geographic Circle ---
     const mapContainer = document.getElementById('property-leaflet-map');
@@ -600,7 +808,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    // Attach Lightbox open/close handlers
+    // Attach Video Lightbox open/close handlers
     if (property.videoEmbedUrl) {
       const modal = document.getElementById('video-lightbox-modal');
       const iframe = document.getElementById('lightbox-iframe');
