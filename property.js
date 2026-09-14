@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Load Property Data ---
     const urlParams = new URLSearchParams(window.location.search);
-    const propertyId = urlParams.get('id') || 'ref-007';
+    const propertyId = urlParams.get('id') || 'ref-001';
     const property = properties.find(p => p.id === propertyId) || properties[0];
     
     const mainContainer = document.getElementById('property-main');

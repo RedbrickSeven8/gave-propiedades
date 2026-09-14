@@ -47,10 +47,14 @@ function initHomeCoverageMap() {
     if (mapEl && !mapEl.dataset.initialized) {
         mapEl.dataset.initialized = "true";
         try {
-            // Center of Colombia / Eje Cafetero region
+            // Center on Armenia / property location
+            const defaultLat = properties[0]?.lat || 4.5428;
+            const defaultLng = properties[0]?.lng || -75.6792;
+            const defaultZoom = 13;
+
             const map = L.map('home-coverage-map', {
-                center: [4.8, -74.8],
-                zoom: 6,
+                center: [defaultLat, defaultLng],
+                zoom: defaultZoom,
                 zoomControl: true,
                 scrollWheelZoom: false
             });
@@ -62,40 +66,40 @@ function initHomeCoverageMap() {
                 maxZoom: 18
             }).addTo(map);
 
-            // Add all active properties zones fixed to real coordinates
+            // Add active properties zones fixed to real coordinates
             properties.forEach(prop => {
                 if (prop.lat && prop.lng) {
                     // Fixed geographic circle on map
                     L.circle([prop.lat, prop.lng], {
                         color: '#3E7751',
                         fillColor: '#3E7751',
-                        fillOpacity: 0.25,
-                        weight: 2,
-                        radius: (prop.zoneRadius || 400) * 12, // scaled for country/region view
-                        dashArray: '5, 5'
+                        fillOpacity: 0.28,
+                        weight: 2.5,
+                        radius: prop.zoneRadius || 400,
+                        dashArray: '6, 6'
                     }).addTo(map);
 
                     // Custom pulsing pin marker
                     const pinIcon = L.divIcon({
                         className: 'home-map-pin',
                         html: `
-                            <div style="position: relative; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+                            <div style="position: relative; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
                                 <div style="position: absolute; inset: 0; border-radius: 50%; background: rgba(62, 119, 81, 0.45); animation: ping 2.5s cubic-bezier(0, 0, 0.2, 1) infinite;"></div>
-                                <div style="position: relative; width: 28px; height: 28px; border-radius: 50%; background: #00375D; border: 2px solid #FFFFFF; box-shadow: 0 4px 10px rgba(0,0,0,0.35); display: flex; align-items: center; justify-content: center; color: #FFFFFF;">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                                <div style="position: relative; width: 30px; height: 30px; border-radius: 50%; background: #00375D; border: 2.5px solid #FFFFFF; box-shadow: 0 4px 10px rgba(0,0,0,0.35); display: flex; align-items: center; justify-content: center; color: #FFFFFF;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
                                 </div>
                             </div>
                         `,
-                        iconSize: [32, 32],
-                        iconAnchor: [16, 16]
+                        iconSize: [34, 34],
+                        iconAnchor: [17, 17]
                     });
 
                     const marker = L.marker([prop.lat, prop.lng], { icon: pinIcon }).addTo(map);
                     
                     marker.bindPopup(`
-                        <div style="font-family: Inter, sans-serif; padding: 4px; color: #00375D; min-width: 140px;">
-                            <strong style="font-size: 12px; display: block; margin-bottom: 2px;">${prop.title}</strong>
-                            <span style="font-size: 11px; color: #3E7751; font-weight: 600;">${prop.location}</span>
+                        <div style="font-family: Inter, sans-serif; padding: 4px; color: #00375D; min-width: 150px;">
+                            <strong style="font-size: 13px; display: block; margin-bottom: 2px;">${prop.title}</strong>
+                            <span style="font-size: 11px; color: #3E7751; font-weight: 600;">Sector ${prop.sector || prop.location}</span>
                             <a href="/property.html?id=${prop.id}" style="display: block; margin-top: 6px; font-size: 11px; color: #00375D; font-weight: 700; text-decoration: underline;">Ver propiedad →</a>
                         </div>
                     `);
