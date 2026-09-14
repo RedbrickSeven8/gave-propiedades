@@ -22,19 +22,19 @@ export const properties = [
     enConjunto: 'No',
     videoUrl: 'https://drive.google.com/open?id=1dtWe3FSP2A5peNauQ7B9LmWcuhmELZzt',
     description: 'Hermosa casa de 2 niveles ubicada en el prestigioso y tranquilo sector de Las Américas en Armenia, Quindío. La propiedad cuenta con sala espaciosa, comedor independiente, cocina integral, 3 cómodas habitaciones, 3 baños completos, zona de ropas, patio privado y parqueadero cubierto para 2 vehículos. Sector de alta valorización con vías pavimentadas y excelente conectividad.',
-    mainImg: '/properties/ref-007/foto_1.jpg',
+    mainImg: '/properties/ref-007/foto_4.jpg',
     images: [
-      '/properties/ref-007/foto_2.jpg',
       '/properties/ref-007/foto_3.jpg',
-      '/properties/ref-007/foto_4.jpg',
+      '/properties/ref-007/foto_1.jpg',
+      '/properties/ref-007/foto_2.jpg',
       '/properties/ref-007/foto_5.jpg',
       '/properties/ref-007/foto_6.jpg',
-      '/properties/ref-007/foto_7.jpg',
       '/properties/ref-007/foto_8.jpg',
-      '/properties/ref-007/foto_9.jpg',
-      '/properties/ref-007/foto_10.jpg',
       '/properties/ref-007/foto_11.jpg',
-      '/properties/ref-007/foto_12.jpg'
+      '/properties/ref-007/foto_7.jpg',
+      '/properties/ref-007/foto_9.jpg',
+      '/properties/ref-007/foto_12.jpg',
+      '/properties/ref-007/foto_10.jpg'
     ],
     features: [
       'Sala y comedor independientes',
