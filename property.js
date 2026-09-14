@@ -1,4 +1,6 @@
 import './style.css';
+import 'leaflet/dist/leaflet.css';
+import L from 'leaflet';
 import { properties } from './data.js';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -70,28 +72,38 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
     `).join('');
 
-    // Video Section with Interactive Lightbox trigger
+    // Video Section with Interactive Lightbox
     const videoSectionHtml = property.videoEmbedUrl ? `
       <div class="bg-white p-6 md:p-8 rounded-3xl shadow-sm border border-gray-100">
-        <h2 class="text-2xl font-bold text-gave-primary mb-2 flex items-center gap-3">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gave-secondary"><polygon points="23 7 16 12 23 17 23 7"/><rect width="15" height="14" x="1" y="5" rx="2" ry="2"/></svg>
-          Video Tour del Inmueble
-        </h2>
-        <p class="text-gray-600 mb-6 text-sm">Haz clic para abrir el recorrido virtual interactivo en alta definición.</p>
-        
-        <!-- Video Preview Card with Lightbox Trigger -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
+          <div>
+            <h2 class="text-2xl font-bold text-gave-primary flex items-center gap-3">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gave-secondary"><polygon points="23 7 16 12 23 17 23 7"/><rect width="15" height="14" x="1" y="5" rx="2" ry="2"/></svg>
+              Video Tour del Inmueble
+            </h2>
+            <p class="text-gray-600 text-sm mt-1">Haz clic sobre la vista previa para abrir el video tour completo en el reproductor interactivo.</p>
+          </div>
+          <button id="btn-trigger-lightbox" class="inline-flex items-center gap-2 px-5 py-2.5 bg-gave-primary text-white rounded-full font-bold text-xs hover:bg-gave-secondary transition-all cursor-pointer shadow-sm flex-shrink-0 self-start sm:self-auto">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            Ver en Pantalla Completa
+          </button>
+        </div>
+
+        <!-- Embedded Video Player Preview / Lightbox Trigger -->
         <div 
           id="open-video-lightbox"
-          class="relative w-full aspect-video md:aspect-[21/9] rounded-2xl overflow-hidden shadow-lg bg-gray-900 group cursor-pointer border-2 border-gave-primary/20 hover:border-gave-secondary transition-all"
+          class="relative w-full aspect-video md:aspect-[21/9] rounded-2xl overflow-hidden shadow-lg bg-gray-950 group cursor-pointer border border-gray-200 hover:border-gave-secondary transition-all"
         >
-          <img src="${property.mainImg}" alt="Vista previa Video Tour" class="w-full h-full object-cover opacity-60 group-hover:opacity-40 group-hover:scale-105 transition-all duration-500" />
+          <!-- Background Cover -->
+          <img src="${property.mainImg}" alt="Vista previa Video Tour" class="w-full h-full object-cover opacity-60 group-hover:opacity-40 group-hover:scale-105 transition-all duration-700" />
           
+          <!-- Play Overlay -->
           <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex flex-col items-center justify-center p-6 text-center">
-            <div class="w-16 h-16 md:w-20 md:h-20 rounded-full bg-gave-secondary text-white flex items-center justify-center shadow-2xl group-hover:scale-110 active:scale-95 transition-transform duration-300">
-              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="currentColor" class="ml-1"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            <div class="w-16 h-16 md:w-20 md:h-20 rounded-full bg-gave-secondary text-white flex items-center justify-center shadow-2xl group-hover:scale-110 active:scale-95 transition-transform duration-300 ring-4 ring-white/30">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="currentColor" class="ml-1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
             </div>
-            <p class="mt-4 text-white font-extrabold text-lg md:text-xl drop-shadow-md">Reproducir Video Tour</p>
-            <span class="mt-1 text-xs text-white/80 font-medium px-3 py-1 bg-white/20 rounded-full backdrop-blur-sm">Abrir en Lightbox</span>
+            <p class="mt-4 text-white font-extrabold text-lg md:text-2xl drop-shadow-md">Reproducir Video Tour</p>
+            <span class="mt-1.5 text-xs text-white/90 font-medium px-3.5 py-1 bg-white/20 rounded-full backdrop-blur-md border border-white/20">Abrir en Lightbox</span>
           </div>
         </div>
       </div>
@@ -233,34 +245,38 @@ document.addEventListener('DOMContentLoaded', () => {
               </ul>
             </div>
 
-            <!-- Ubicación con Mapa Circular Específico -->
+            <!-- Ubicación con Mapa Interactivo y Zona Fija Real (Leaflet OpenStreetMap) -->
             <div class="bg-white p-8 rounded-3xl shadow-sm border border-gray-100">
-              <div class="flex items-center justify-between mb-6">
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
                 <div>
-                  <h2 class="text-2xl font-bold text-gave-primary">Ubicación y Entorno</h2>
-                  <p class="text-gray-500 text-sm mt-1">${property.location} - Sector ${property.sector || 'residencial'}</p>
+                  <h2 class="text-2xl font-bold text-gave-primary flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gave-secondary"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                    Ubicación y Sector
+                  </h2>
+                  <p class="text-gray-500 text-sm mt-1">${property.location} · ${property.sector ? `Sector ${property.sector}` : 'Zona Residencial'}</p>
                 </div>
+                <a 
+                  href="https://maps.google.com/?q=${encodeURIComponent((property.sector ? property.sector + ', ' : '') + property.location)}" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-2 text-xs font-bold text-gave-secondary bg-emerald-50 px-4 py-2 rounded-full hover:bg-gave-secondary hover:text-white transition-all shadow-sm flex-shrink-0 self-start sm:self-auto"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                  Abrir en Google Maps
+                </a>
               </div>
               
-              <div class="relative w-full aspect-video rounded-2xl overflow-hidden bg-gray-200 shadow-inner">
-                <iframe 
-                  src="${property.mapEmbedUrl || `https://maps.google.com/maps?q=${encodeURIComponent(property.location)}&t=&z=14&ie=UTF8&iwloc=&output=embed`}" 
-                  width="100%" 
-                  height="100%" 
-                  style="border:0;" 
-                  allowfullscreen="" 
-                  loading="lazy" 
-                  referrerpolicy="no-referrer-when-downgrade"
-                  class="filter grayscale opacity-90 contrast-125 w-full h-full">
-                </iframe>
-                <!-- Círculo señalando la zona aproximada -->
-                <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-28 h-28 md:w-36 md:h-36 bg-gave-secondary/30 rounded-full border-2 border-gave-secondary flex items-center justify-center animate-pulse shadow-[0_0_25px_rgba(62,119,81,0.6)] pointer-events-none">
-                  <div class="bg-white p-2.5 rounded-full shadow-lg border border-gave-secondary text-gave-secondary">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-                  </div>
+              <!-- Map Container with Leaflet Render Target -->
+              <div class="relative w-full aspect-video rounded-2xl overflow-hidden bg-slate-100 shadow-inner border border-gray-200">
+                <div id="property-leaflet-map" class="w-full h-full z-10" style="min-height: 340px;"></div>
+                
+                <!-- Floating Info Badge on Map -->
+                <div class="absolute top-3 left-3 z-[400] bg-white/95 backdrop-blur-md px-3.5 py-1.5 rounded-xl border border-gray-200/80 shadow-md flex items-center gap-2 text-xs font-bold text-gave-primary pointer-events-none">
+                  <span class="w-2.5 h-2.5 rounded-full bg-gave-secondary animate-pulse"></span>
+                  Zona señalada: ${property.sector || property.location.split(',')[0]}
                 </div>
               </div>
-              <p class="text-xs text-gray-400 mt-3 text-center italic">* Por seguridad y privacidad de nuestros propietarios, el mapa indica la zona y sector de referencia en ${property.location}.</p>
+              <p class="text-xs text-gray-400 mt-3 text-center italic">* El círculo verde representa la zona aproximada del inmueble en el mapa interactivo (puedes hacer zoom y desplazar el mapa libremente manteniendo la zona fija en sus coordenadas geográficas exactas).</p>
             </div>
 
           </div>
@@ -318,29 +334,47 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
       </div>
 
-      <!-- Video Lightbox Modal -->
+      <!-- Video Lightbox Modal (Full HD Interactive Embed) -->
       ${property.videoEmbedUrl ? `
-        <div id="video-lightbox-modal" class="fixed inset-0 z-[99999] bg-black/90 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 opacity-0 pointer-events-none transition-opacity duration-300">
-          <div class="relative w-full max-w-4xl bg-black rounded-3xl overflow-hidden shadow-2xl border border-white/20 transform scale-95 transition-transform duration-300" id="video-modal-content">
-            <!-- Close Button -->
-            <button id="close-video-lightbox" class="absolute top-4 right-4 z-50 w-11 h-11 rounded-full bg-black/60 hover:bg-gave-secondary text-white border border-white/20 flex items-center justify-center transition-all cursor-pointer" aria-label="Cerrar video">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-            </button>
+        <div 
+          id="video-lightbox-modal" 
+          class="fixed inset-0 z-[99999] bg-black/90 backdrop-blur-md flex items-center justify-center p-4 md:p-8 opacity-0 pointer-events-none transition-opacity duration-300"
+        >
+          <div class="relative w-full max-w-4xl bg-black rounded-3xl overflow-hidden shadow-2xl border border-white/20 flex flex-col">
+            <!-- Modal Header -->
+            <div class="flex items-center justify-between p-4 px-6 bg-gray-900/90 border-b border-white/10">
+              <div class="flex items-center gap-2 text-white">
+                <span class="w-3 h-3 rounded-full bg-emerald-400"></span>
+                <span class="font-bold text-sm md:text-base">${property.title} - Video Tour</span>
+              </div>
+              <button 
+                id="close-video-lightbox" 
+                class="w-10 h-10 rounded-full bg-white/10 hover:bg-red-500 text-white flex items-center justify-center transition-colors cursor-pointer text-lg font-bold"
+                aria-label="Cerrar video"
+              >
+                ✕
+              </button>
+            </div>
             
+            <!-- Video Iframe Container -->
             <div class="relative w-full aspect-video bg-black">
               <iframe 
                 id="lightbox-iframe"
-                src=""
+                src="" 
                 data-src="${property.videoEmbedUrl}"
-                class="w-full h-full border-0" 
-                allow="autoplay; encrypted-media; fullscreen" 
-                allowfullscreen>
-              </iframe>
+                class="w-full h-full" 
+                allow="autoplay; fullscreen"
+                allowfullscreen
+              ></iframe>
             </div>
             
-            <div class="p-4 bg-gray-900 border-t border-white/10 flex items-center justify-between text-white text-sm">
-              <p class="font-bold">${property.title}</p>
-              <a href="${property.videoUrl}" target="_blank" class="text-xs text-gave-secondary hover:underline">Abrir enlace externo ↗</a>
+            <!-- Modal Footer -->
+            <div class="p-4 px-6 bg-gray-900/90 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/70">
+              <span>Gave Propiedades · Recorrido Virtual</span>
+              <a href="https://wa.me/573183593507?text=${waMsg}" target="_blank" class="px-5 py-2 bg-[#25D366] text-white font-bold rounded-full hover:bg-[#128C7E] transition-all flex items-center gap-1.5 shadow-md">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2ZM12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19.01L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67ZM8.53 7.33C8.37 7.33 8.1 7.39 7.87 7.64C7.65 7.89 7.02 8.48 7.02 9.68C7.02 10.88 7.89 12.04 8.01 12.2C8.13 12.37 9.71 14.81 12.14 15.86C14.16 16.73 14.57 16.55 15.02 16.51C15.46 16.47 16.44 15.93 16.64 15.36C16.85 14.78 16.85 14.29 16.78 14.19C16.72 14.08 16.56 14.02 16.32 13.9C16.08 13.78 14.9 13.2 14.68 13.12C14.46 13.04 14.3 13 14.14 13.24C13.98 13.48 13.51 14.02 13.37 14.19C13.23 14.35 13.09 14.37 12.85 14.25C12.61 14.13 11.84 13.88 10.92 13.06C10.2 12.42 9.72 11.63 9.58 11.39C9.44 11.15 9.56 11.02 9.68 10.9C9.79 10.79 9.93 10.61 10.05 10.47C10.17 10.33 10.21 10.23 10.29 10.07C10.37 9.91 10.33 9.77 10.27 9.65C10.21 9.53 9.73 8.35 9.53 7.87C9.33 7.39 9.13 7.45 8.98 7.45C8.84 7.45 8.68 7.33 8.53 7.33Z"/></svg>
+                Agendar Visita
+              </a>
             </div>
           </div>
         </div>
@@ -349,48 +383,111 @@ document.addEventListener('DOMContentLoaded', () => {
 
     mainContainer.innerHTML = propertyHtml;
 
-    // Lightbox open/close event listeners
-    if (property.videoEmbedUrl) {
-      const openBtn = document.getElementById('open-video-lightbox');
-      const closeBtn = document.getElementById('close-video-lightbox');
-      const modal = document.getElementById('video-lightbox-modal');
-      const modalContent = document.getElementById('video-modal-content');
-      const iframe = document.getElementById('lightbox-iframe');
+    // --- Initialize Leaflet Interactive Map with Fixed Geographic Circle ---
+    const mapContainer = document.getElementById('property-leaflet-map');
+    if (mapContainer && property.lat && property.lng) {
+      try {
+        const lat = property.lat;
+        const lng = property.lng;
+        const zoom = property.zoom || 15;
+        const radius = property.zoneRadius || 400;
 
-      const openModal = () => {
+        const map = L.map('property-leaflet-map', {
+          center: [lat, lng],
+          zoom: zoom,
+          zoomControl: true,
+          scrollWheelZoom: false
+        });
+
+        // Add CartoDB Positron / OSM tiles (clean, professional aesthetic)
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+          subdomains: 'abcd',
+          maxZoom: 19
+        }).addTo(map);
+
+        // Fixed Geographic Circle bound to real coordinates
+        const zoneCircle = L.circle([lat, lng], {
+          color: '#3E7751',
+          fillColor: '#3E7751',
+          fillOpacity: 0.28,
+          weight: 2.5,
+          radius: radius,
+          dashArray: '6, 6'
+        }).addTo(map);
+
+        // Custom branded Pulsing Icon in the exact center
+        const customPinIcon = L.divIcon({
+          className: 'custom-map-pin',
+          html: `
+            <div style="position: relative; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;">
+              <div style="position: absolute; inset: 0; border-radius: 50%; background: rgba(62, 119, 81, 0.4); animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;"></div>
+              <div style="position: relative; width: 32px; height: 32px; border-radius: 50%; background: #00375D; border: 2.5px solid #FFFFFF; box-shadow: 0 4px 12px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; color: #FFFFFF;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+            </div>
+          `,
+          iconSize: [36, 36],
+          iconAnchor: [18, 18]
+        });
+
+        const marker = L.marker([lat, lng], { icon: customPinIcon }).addTo(map);
+        
+        // Popup with property details
+        marker.bindPopup(`
+          <div style="font-family: Inter, sans-serif; padding: 4px; color: #00375D;">
+            <strong style="font-size: 13px; display: block; margin-bottom: 2px;">${property.title}</strong>
+            <span style="font-size: 11px; color: #3E7751; font-weight: 600;">Sector ${property.sector || property.location}</span>
+          </div>
+        `);
+
+        // Trigger map resize fix after mount
+        setTimeout(() => {
+          map.invalidateSize();
+        }, 300);
+
+      } catch (err) {
+        console.error('Error initializing Leaflet map:', err);
+      }
+    }
+
+    // Attach Lightbox open/close handlers
+    if (property.videoEmbedUrl) {
+      const modal = document.getElementById('video-lightbox-modal');
+      const iframe = document.getElementById('lightbox-iframe');
+      const openTrigger = document.getElementById('open-video-lightbox');
+      const btnTrigger = document.getElementById('btn-trigger-lightbox');
+      const closeTrigger = document.getElementById('close-video-lightbox');
+
+      const openLightbox = () => {
         if (!modal || !iframe) return;
-        iframe.src = iframe.getAttribute('data-src');
+        iframe.src = iframe.getAttribute('data-src') || '';
         modal.classList.remove('opacity-0', 'pointer-events-none');
         modal.classList.add('opacity-100', 'pointer-events-auto');
-        if (modalContent) {
-          modalContent.classList.remove('scale-95');
-          modalContent.classList.add('scale-100');
-        }
         document.body.style.overflow = 'hidden';
       };
 
-      const closeModal = () => {
+      const closeLightbox = () => {
         if (!modal || !iframe) return;
         iframe.src = '';
         modal.classList.remove('opacity-100', 'pointer-events-auto');
         modal.classList.add('opacity-0', 'pointer-events-none');
-        if (modalContent) {
-          modalContent.classList.remove('scale-100');
-          modalContent.classList.add('scale-95');
-        }
         document.body.style.overflow = '';
       };
 
-      if (openBtn) openBtn.addEventListener('click', openModal);
-      if (closeBtn) closeBtn.addEventListener('click', closeModal);
+      if (openTrigger) openTrigger.addEventListener('click', openLightbox);
+      if (btnTrigger) btnTrigger.addEventListener('click', openLightbox);
+      if (closeTrigger) closeTrigger.addEventListener('click', closeLightbox);
+
       if (modal) {
         modal.addEventListener('click', (e) => {
-          if (e.target === modal) closeModal();
+          if (e.target === modal) closeLightbox();
         });
       }
+
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && modal && !modal.classList.contains('opacity-0')) {
-          closeModal();
+          closeLightbox();
         }
       });
     }
