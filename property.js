@@ -66,10 +66,20 @@ document.addEventListener('DOMContentLoaded', () => {
     // All available gallery photos (mainImg + images)
     const allGalleryImages = [property.mainImg, ...(property.images || [])];
     
+    // Build thumbnails with clear green border on selected item
     const thumbnailsHtml = allGalleryImages.map((imgUrl, idx) => `
-        <div class="w-full aspect-square rounded-2xl overflow-hidden shadow-sm bg-gray-200 cursor-pointer border-2 transition-all duration-300 ${idx === 0 ? 'border-gave-secondary ring-2 ring-gave-secondary/20' : 'border-transparent hover:border-gave-secondary'}" onclick="document.getElementById('main-property-img').src='${imgUrl}'; document.querySelectorAll('.gallery-thumb').forEach(el => el.classList.remove('border-gave-secondary', 'ring-2', 'ring-gave-secondary/20')); this.classList.add('border-gave-secondary', 'ring-2', 'ring-gave-secondary/20');" class="gallery-thumb">
-          <img src="${imgUrl}" alt="${property.title} foto ${idx + 1}" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
-        </div>
+        <button 
+          type="button"
+          data-index="${idx}"
+          class="gallery-thumb w-full aspect-square rounded-2xl overflow-hidden shadow-sm bg-gray-200 cursor-pointer border-3 transition-all duration-300 p-0 ${
+            idx === 0 
+              ? 'border-[#3E7751] ring-4 ring-[#3E7751]/30 scale-95' 
+              : 'border-transparent hover:border-[#3E7751]/50 opacity-80 hover:opacity-100'
+          }"
+          aria-label="Ver foto ${idx + 1}"
+        >
+          <img src="${imgUrl}" alt="${property.title} foto ${idx + 1}" class="w-full h-full object-cover">
+        </button>
     `).join('');
 
     // Video Section with Interactive Lightbox
@@ -147,15 +157,49 @@ document.addEventListener('DOMContentLoaded', () => {
           <!-- LEFT COLUMN: Gallery & Details -->
           <div class="lg:col-span-2 space-y-10">
             
-            <!-- Gallery Grid -->
+            <!-- Interactive Gallery with Arrow Navigation -->
             <div class="flex flex-col gap-4">
-              <!-- Main Image -->
-              <div class="w-full aspect-[4/3] md:aspect-[16/10] rounded-3xl overflow-hidden shadow-md bg-gray-200">
-                <img id="main-property-img" src="${property.mainImg}" alt="${property.title}" class="w-full h-full object-cover transition-all duration-300">
+              <!-- Main Image Container with Prev/Next Navigation Buttons -->
+              <div class="relative w-full aspect-[4/3] md:aspect-[16/10] rounded-3xl overflow-hidden shadow-lg bg-gray-900 group select-none">
+                <img 
+                  id="main-property-img" 
+                  src="${property.mainImg}" 
+                  alt="${property.title}" 
+                  class="w-full h-full object-cover transition-all duration-300"
+                >
+
+                <!-- Left Arrow (Prev) -->
+                <button
+                  id="gallery-prev-btn"
+                  type="button"
+                  aria-label="Foto anterior"
+                  class="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-black/60 hover:bg-[#3E7751] text-white backdrop-blur-md border border-white/30 flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95 shadow-2xl cursor-pointer"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m15 18-6-6 6-6"/>
+                  </svg>
+                </button>
+
+                <!-- Right Arrow (Next) -->
+                <button
+                  id="gallery-next-btn"
+                  type="button"
+                  aria-label="Foto siguiente"
+                  class="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-black/60 hover:bg-[#3E7751] text-white backdrop-blur-md border border-white/30 flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95 shadow-2xl cursor-pointer"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m9 18 6-6-6-6"/>
+                  </svg>
+                </button>
+
+                <!-- Photo Counter Indicator Badge -->
+                <div class="absolute bottom-4 right-4 z-20 px-3.5 py-1.5 rounded-full bg-black/70 backdrop-blur-md border border-white/20 text-white text-xs font-bold tracking-wider shadow-lg">
+                  <span id="gallery-counter">1 / ${allGalleryImages.length}</span>
+                </div>
               </div>
               
               <!-- Thumbnails Grid -->
-              <div class="grid grid-cols-4 sm:grid-cols-6 gap-3">
+              <div class="grid grid-cols-4 sm:grid-cols-6 gap-3" id="gallery-thumbs-container">
                 ${thumbnailsHtml}
               </div>
             </div>
@@ -382,6 +426,111 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
 
     mainContainer.innerHTML = propertyHtml;
+
+    // --- Interactive Gallery Logic with Arrow Buttons and Green Border Highlight ---
+    let currentPhotoIndex = 0;
+    const mainImgEl = document.getElementById('main-property-img');
+    const counterEl = document.getElementById('gallery-counter');
+    const prevBtn = document.getElementById('gallery-prev-btn');
+    const nextBtn = document.getElementById('gallery-next-btn');
+    const thumbButtons = document.querySelectorAll('.gallery-thumb');
+
+    const updateGalleryPhoto = (newIndex) => {
+      if (!mainImgEl || allGalleryImages.length === 0) return;
+      
+      // Wrap around index
+      if (newIndex >= allGalleryImages.length) {
+        currentPhotoIndex = 0;
+      } else if (newIndex < 0) {
+        currentPhotoIndex = allGalleryImages.length - 1;
+      } else {
+        currentPhotoIndex = newIndex;
+      }
+
+      // Smooth fade transition for main image
+      mainImgEl.style.opacity = '0.6';
+      mainImgEl.style.transform = 'scale(0.99)';
+      
+      setTimeout(() => {
+        mainImgEl.src = allGalleryImages[currentPhotoIndex];
+        mainImgEl.style.opacity = '1';
+        mainImgEl.style.transform = 'scale(1)';
+      }, 100);
+
+      // Update counter text
+      if (counterEl) {
+        counterEl.textContent = `${currentPhotoIndex + 1} / ${allGalleryImages.length}`;
+      }
+
+      // Update thumbnail active styles (Vibrant green border on selected item)
+      thumbButtons.forEach((btn, idx) => {
+        if (idx === currentPhotoIndex) {
+          btn.classList.remove('border-transparent', 'opacity-80');
+          btn.classList.add('border-[#3E7751]', 'ring-4', 'ring-[#3E7751]/30', 'scale-95', 'opacity-100');
+          // Scroll thumbnail into view if needed
+          btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+        } else {
+          btn.classList.remove('border-[#3E7751]', 'ring-4', 'ring-[#3E7751]/30', 'scale-95');
+          btn.classList.add('border-transparent', 'opacity-80');
+        }
+      });
+    };
+
+    // Prev/Next Click Event Listeners
+    if (prevBtn) {
+      prevBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        updateGalleryPhoto(currentPhotoIndex - 1);
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        updateGalleryPhoto(currentPhotoIndex + 1);
+      });
+    }
+
+    // Thumbnail Click Event Listeners
+    thumbButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const idx = parseInt(btn.getAttribute('data-index') || '0', 10);
+        updateGalleryPhoto(idx);
+      });
+    });
+
+    // Keyboard Left/Right Arrow Navigation
+    document.addEventListener('keydown', (e) => {
+      const modal = document.getElementById('video-lightbox-modal');
+      const isModalOpen = modal && !modal.classList.contains('opacity-0');
+      
+      if (!isModalOpen) {
+        if (e.key === 'ArrowLeft') {
+          updateGalleryPhoto(currentPhotoIndex - 1);
+        } else if (e.key === 'ArrowRight') {
+          updateGalleryPhoto(currentPhotoIndex + 1);
+        }
+      }
+    });
+
+    // Swipe gestures on main image for mobile
+    if (mainImgEl) {
+      let touchStartX = 0;
+      let touchEndX = 0;
+      
+      mainImgEl.parentElement.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+      }, { passive: true });
+
+      mainImgEl.parentElement.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        if (touchStartX - touchEndX > 45) {
+          updateGalleryPhoto(currentPhotoIndex + 1); // Swipe left -> next
+        } else if (touchEndX - touchStartX > 45) {
+          updateGalleryPhoto(currentPhotoIndex - 1); // Swipe right -> prev
+        }
+      }, { passive: true });
+    }
 
     // --- Initialize Leaflet Interactive Map with Fixed Geographic Circle ---
     const mapContainer = document.getElementById('property-leaflet-map');
