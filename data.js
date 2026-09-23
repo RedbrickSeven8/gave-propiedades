@@ -90,9 +90,9 @@ export const properties = [
     mainImg: '/properties/ref-002/foto_1.jpg',
     images: [
       '/properties/ref-002/foto_3.jpg',
+      '/properties/ref-002/foto_6.jpg',
       '/properties/ref-002/foto_4.jpg',
       '/properties/ref-002/foto_5.jpg',
-      '/properties/ref-002/foto_6.jpg',
       '/properties/ref-002/foto_7.jpg',
       '/properties/ref-002/foto_8.jpg',
       '/properties/ref-002/foto_2.jpg'
