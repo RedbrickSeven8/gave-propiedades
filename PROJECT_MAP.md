@@ -32,13 +32,11 @@ graph TD
 
     %% Base de Datos de Inmuebles
     subgraph Inmuebles ["Propiedades Registradas"]
-        Ref001["ref-001: Casa en Las Américas ($340M COP)"]
         Ref002["ref-002: Apartaestudio Nuevo en Pinares ($130M COP)"]
     end
 
     %% Recursos y Multimedia
     subgraph Assets ["Archivos Multimedia"]
-        Ref001_Imgs["public/properties/ref-001/ (Fotos 1-12)"]
         Ref002_Imgs["public/properties/ref-002/ (Fotos 1-8 Fachada a Interior)"]
         BrandLogo["public/logo.png / logo.svg"]
     end
@@ -58,10 +56,8 @@ graph TD
     PropertyJS --> DataJS
     PropertyJS --> LeafletJS
 
-    DataJS --> Ref001
     DataJS --> Ref002
 
-    Ref001 --> Ref001_Imgs
     Ref002 --> Ref002_Imgs
 
     Index --> StyleCSS
@@ -76,7 +72,7 @@ graph TD
 - **`index.html` & `main.js`**:
   - Landing page institucional de Gave Propiedades.
   - Hero interactivo con llamada a la acción y animaciones GSAP.
-  - Sección de Propiedades Destacadas (`ref-001` y `ref-002`) con fichas directas.
+  - Sección de Propiedad Destacada (`ref-002`) con ficha directa.
   - Mapa interactivo de cobertura con Leaflet.js centrado en las zonas activas.
   - Carrusel de equipo interactivo montado en React (`GaveCarousel.jsx`).
   - Secciones de servicios, testimonios, proceso de compra/venta y FAQ.
@@ -86,7 +82,7 @@ graph TD
   - Renderizado reactivo desde `data.js` con estados vacíos y feedback visual.
 
 - **`property.html` & `property.js`**:
-  - Ficha técnica completa del inmueble obtenido por parámetro `?id=ref-XXX`.
+  - Ficha técnica completa del inmueble obtenido por parámetro `?id=ref-XXX` (por defecto `ref-002`).
   - Galería de imágenes interactiva organizada en la secuencia exacta solicitada:
     1. `foto_1.jpg` (Fachada - Portada)
     2. `foto_3.jpg` (Sala-comedor)
@@ -103,7 +99,6 @@ graph TD
 
 - **`data.js`**:
   - Fuente única de la verdad con las propiedades publicadas:
-    - `ref-001`: Casa en Sector Las Américas, Armenia (125 m², 3 hab, 3 baños, parqueadero cubierto, $340.000.000 COP).
     - `ref-002`: Apartaestudio Nuevo en Sector Pinares, Armenia (39 m², 1 hab, 1 baño, cocina integral, pisos en porcelanato, $130.000.000 COP).
 
 ## 3. Despliegue y Hosting
