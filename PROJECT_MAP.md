@@ -87,8 +87,8 @@ graph TD
 
 - **`property.html` & `property.js`**:
   - Ficha técnica completa del inmueble obtenido por parámetro `?id=ref-XXX`.
-  - Galería de imágenes interactiva organizada cronológicamente desde fachada exterior hacia áreas interiores.
-  - Selector de imágenes con miniaturas y visualizador principal en alta resolución.
+  - Galería de imágenes interactiva organizada de afuera hacia adentro: `mainImg` (foto_1) seguido de fotos de áreas interiores y finalizando con foto_2.
+  - Selector de imágenes con miniaturas y visualizador principal en alta resolución sin fotos duplicadas.
   - Reproductor de video tour integrado y modal lightbox a pantalla completa.
   - Mapa interactivo con Leaflet.js delimitando el radio de influencia y georreferenciación.
   - Botón de contacto directo por WhatsApp con mensaje preconfigurado con el título y referencia del inmueble.
@@ -97,18 +97,16 @@ graph TD
   - Fuente única de la verdad con las propiedades publicadas:
     - `ref-001`: Casa en Sector Las Américas, Armenia (125 m², 3 hab, 3 baños, parqueadero cubierto, $340.000.000 COP).
     - `ref-002`: Apartaestudio Nuevo en Sector Pinares, Armenia (39 m², 1 hab, 1 baño, cocina integral, pisos en porcelanato, $130.000.000 COP).
-
-- **`public/properties/ref-002/`**:
-  - Imágenes ordenadas secuencialmente de afuera hacia adentro:
-    - `foto_1.jpg`: Fachada principal exterior (Sobre vía principal).
-    - `foto_2.jpg`: Entrada / Vista desde acceso exterior hacia área social.
-    - `foto_3.jpg`: Sala y comedor integrados con pisos en porcelanato.
-    - `foto_4.jpg`: Cocina integral moderna con gabinetes.
-    - `foto_5.jpg`: Mesón de cocina, zona de ropas y patio interior.
-    - `foto_6.jpg`: Habitación con closet empotrado e iluminación natural.
-    - `foto_7.jpg`: Perspectiva interior de la alcoba.
-    - `foto_8.jpg`: Baño completo con acabados modernos.
+      - Secuencia de Galería:
+        1. `foto_1.jpg`: Fachada exterior principal (Portada).
+        2. `foto_3.jpg`: Sala y comedor integrados con pisos en porcelanato.
+        3. `foto_4.jpg`: Cocina integral moderna con gabinetes.
+        4. `foto_5.jpg`: Mesón de cocina, zona de ropas y patio interior.
+        5. `foto_6.jpg`: Habitación con closet empotrado e iluminación natural.
+        6. `foto_7.jpg`: Perspectiva interior de la alcoba.
+        7. `foto_8.jpg`: Baño completo con acabados modernos.
+        8. `foto_2.jpg`: Entrada y acceso exterior.
 
 ## 3. Despliegue y Hosting
-- **Plataforma**: Surge.sh (`gave-propiedades-web.surge.sh` / `gave-propiedades-audit.surge.sh`)
+- **Plataforma**: Surge.sh (`gave-propiedades.surge.sh`)
 - **Repositorio**: `github.com/RedbrickSeven8/gave-propiedades`

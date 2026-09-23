@@ -89,14 +89,13 @@ export const properties = [
     description: 'Excelente apartaestudio a estrenar ubicado en el primer piso sobre vía principal en el sector de Pinares, Armenia. Cuenta con 39 m² perfectamente distribuidos con sala, comedor, cocina integral moderna, amplia habitación con closet, baño completo con excelentes acabados, zona de ropas independiente y patio interior. Destaca por sus finos pisos en porcelanato, conexión de gas natural y abundante iluminación natural en todos sus ambientes. Oportunidad ideal de inversión o vivienda propia.',
     mainImg: '/properties/ref-002/foto_1.jpg',
     images: [
-      '/properties/ref-002/foto_1.jpg',
-      '/properties/ref-002/foto_2.jpg',
       '/properties/ref-002/foto_3.jpg',
       '/properties/ref-002/foto_4.jpg',
       '/properties/ref-002/foto_5.jpg',
       '/properties/ref-002/foto_6.jpg',
       '/properties/ref-002/foto_7.jpg',
-      '/properties/ref-002/foto_8.jpg'
+      '/properties/ref-002/foto_8.jpg',
+      '/properties/ref-002/foto_2.jpg'
     ],
     features: [
       'Ubicación en primer piso',
