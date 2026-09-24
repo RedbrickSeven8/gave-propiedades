@@ -1,2 +1,1 @@
-El proyecto ha sido desplegado exitosamente en Surge.
-URL: https://gave-propiedades-web.surge.sh
+https://gave-propiedades.surge.sh
