@@ -3,13 +3,13 @@ import React, { useState, useEffect, useRef } from 'react';
 const photos = [
   {
     id: 1,
-    img: '/img-asesora-1.png',
-    alt: 'Asesora Inmobiliaria Gave Propiedades',
+    img: '/Adriana.jpeg',
+    alt: 'Adriana - Asesora Inmobiliaria Gave Propiedades',
   },
   {
     id: 2,
-    img: '/img-asesora-2.png',
-    alt: 'Asesora Inmobiliaria Gave Propiedades',
+    img: '/Jhormary.jpeg',
+    alt: 'Jhormary - Asesora Inmobiliaria Gave Propiedades',
   }
 ];
 
@@ -119,7 +119,7 @@ export default function TeamPhotoCarousel({ autoPlayInterval = 3500, transitionD
             aria-label="Foto anterior"
             className="absolute left-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-black/40 hover:bg-gave-secondary text-white backdrop-blur-md border border-white/25 flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95 shadow-xl cursor-pointer"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <path d="m15 18-6-6 6-6"/>
             </svg>
           </button>
@@ -130,7 +130,7 @@ export default function TeamPhotoCarousel({ autoPlayInterval = 3500, transitionD
             aria-label="Siguiente foto"
             className="absolute right-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-black/40 hover:bg-gave-secondary text-white backdrop-blur-md border border-white/25 flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95 shadow-xl cursor-pointer"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <path d="m9 18 6-6-6-6"/>
             </svg>
           </button>

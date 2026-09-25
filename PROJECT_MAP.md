@@ -35,8 +35,17 @@ graph TD
         Ref002["ref-002: Apartaestudio Nuevo en Pinares ($130M COP)"]
     end
 
+    %% Servicios Ofrecidos
+    subgraph Servicios ["Servicios Inmobiliarios & Adicionales"]
+        Srv1["Venta de Propiedades"]
+        Srv2["Asesoría de Compra"]
+        Srv3["Acompañamiento Legal"]
+        Srv4["Arquitectura y Diseño (Servicio Adicional)"]
+    end
+
     %% Recursos y Multimedia
     subgraph Assets ["Archivos Multimedia"]
+        TeamImgs["public/Adriana.jpeg & public/Jhormary.jpeg (Carrusel de Asesoras)"]
         Ref002_Imgs["public/properties/ref-002/ (Fotos 1-8 Fachada a Interior)"]
         BrandLogo["public/logo.png / logo.svg"]
     end
@@ -52,12 +61,15 @@ graph TD
     MainJS --> GSAP
     MainJS --> LucideIcons
 
+    GaveCarousel --> TeamImgs
+
     CatalogJS --> DataJS
     PropertyJS --> DataJS
     PropertyJS --> LeafletJS
 
-    DataJS --> Ref002
+    Index --> Servicios
 
+    DataJS --> Ref002
     Ref002 --> Ref002_Imgs
 
     Index --> StyleCSS
@@ -74,8 +86,13 @@ graph TD
   - Hero interactivo con llamada a la acción y animaciones GSAP.
   - Sección de Propiedad Destacada (`ref-002`) con ficha directa.
   - Mapa interactivo de cobertura con Leaflet.js centrado en las zonas activas.
-  - Carrusel de equipo interactivo montado en React (`GaveCarousel.jsx`).
-  - Secciones de servicios, testimonios, proceso de compra/venta y FAQ.
+  - Carrusel de equipo interactivo montado en React (`GaveCarousel.jsx`) con las fotos de **Adriana** (`/Adriana.jpeg`) y **Jhormary** (`/Jhormary.jpeg`).
+  - Sección de **Servicios Inmobiliarios** con 4 tarjetas de alto impacto:
+    1. Venta de Propiedades
+    2. Asesoría de Compra
+    3. Acompañamiento Legal
+    4. **Arquitectura y Diseño** *(Servicio Adicional con botón de contacto directo)*.
+  - Testimonios, proceso de compra/venta y FAQ.
 
 - **`catalog.html` & `catalog.js`**:
   - Buscador y catálogo completo con filtros dinámicos (Tipo: Casas, Apartaestudios, Apartamentos, Lotes; Habitaciones; Rango de área en m²; Ordenamiento por precio).
@@ -102,5 +119,5 @@ graph TD
     - `ref-002`: Apartaestudio Nuevo en Sector Pinares, Armenia (39 m², 1 hab, 1 baño, cocina integral, pisos en porcelanato, $130.000.000 COP).
 
 ## 3. Despliegue y Hosting
-- **Plataforma**: Surge.sh (`gave-propiedades.surge.sh`)
+- **Plataforma**: Surge.sh (`https://gave-propiedades.surge.sh`)
 - **Repositorio**: `github.com/RedbrickSeven8/gave-propiedades`

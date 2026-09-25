@@ -5,13 +5,13 @@ import './Carousel.css';
 const GAVE_ITEMS = [
   {
     id: 1,
-    image: '/img-asesora-1.png',
-    alt: 'Asesora Inmobiliaria 1 - Gave Propiedades'
+    image: '/Adriana.jpeg',
+    alt: 'Adriana - Asesora Inmobiliaria Gave Propiedades'
   },
   {
     id: 2,
-    image: '/img-asesora-2.png',
-    alt: 'Asesora Inmobiliaria 2 - Gave Propiedades'
+    image: '/Jhormary.jpeg',
+    alt: 'Jhormary - Asesora Inmobiliaria Gave Propiedades'
   }
 ];
 
@@ -115,13 +115,12 @@ export default function GaveCarousel({
       setIsAnimating(false);
       return;
     }
-    const lastCloneIndex = itemsForRender.length - 1;
 
-    if (position === lastCloneIndex) {
+    const lastIndex = itemsForRender.length - 1;
+    if (position === lastIndex) {
       setIsJumping(true);
-      const target = 1;
-      setPosition(target);
-      x.set(-target * trackItemOffset);
+      setPosition(1);
+      x.set(-1 * trackItemOffset);
       requestAnimationFrame(() => {
         setIsJumping(false);
         setIsAnimating(false);
@@ -130,10 +129,10 @@ export default function GaveCarousel({
     }
 
     if (position === 0) {
+      const realLast = items.length;
       setIsJumping(true);
-      const target = items.length;
-      setPosition(target);
-      x.set(-target * trackItemOffset);
+      setPosition(realLast);
+      x.set(-realLast * trackItemOffset);
       requestAnimationFrame(() => {
         setIsJumping(false);
         setIsAnimating(false);
