@@ -119,5 +119,5 @@ graph TD
     - `ref-002`: Apartaestudio Nuevo en Sector Pinares, Armenia (39 m², 1 hab, 1 baño, cocina integral, pisos en porcelanato, $130.000.000 COP).
 
 ## 3. Despliegue y Hosting
-- **Plataforma**: Surge.sh (`https://gave-propiedades.surge.sh`)
+- **Plataforma**: Surge.sh (`https://gavepropiedades.com (Principal) | https://gave-propiedades.surge.sh (Staging)`)
 - **Repositorio**: `github.com/RedbrickSeven8/gave-propiedades`
