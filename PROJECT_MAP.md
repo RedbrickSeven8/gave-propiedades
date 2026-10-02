@@ -32,7 +32,7 @@ graph TD
 
     %% Base de Datos de Inmuebles
     subgraph Inmuebles ["Propiedades Registradas"]
-        Ref002["ref-002: Apartaestudio Nuevo en Pinares ($130M COP)"]
+        Ref002["ref-002: Apartaestudio en Pinares (VENDIDA - $130M COP)"]
     end
 
     %% Servicios Ofrecidos
@@ -116,7 +116,7 @@ graph TD
 
 - **`data.js`**:
   - Fuente única de la verdad con las propiedades publicadas:
-    - `ref-002`: Apartaestudio Nuevo en Sector Pinares, Armenia (39 m², 1 hab, 1 baño, cocina integral, pisos en porcelanato, $130.000.000 COP).
+    - `ref-002`: Apartaestudio en Sector Pinares (Vendida), Armenia (39 m², 1 hab, 1 baño, cocina integral, pisos en porcelanato, $130.000.000 COP).
 
 ## 3. Despliegue y Hosting
 - **Plataforma**: Surge.sh (`https://gavepropiedades.com (Principal) | https://gave-propiedades.surge.sh (Staging)`)

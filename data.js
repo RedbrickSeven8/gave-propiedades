@@ -2,7 +2,7 @@ export const properties = [
   {
     id: 'ref-002',
     type: 'Aparta estudio',
-    status: 'Nuevo',
+    status: 'Vendida',
     price: 130000000,
     title: 'Apartaestudio Nuevo en Sector Pinares',
     location: 'Armenia, Quindío, Colombia',

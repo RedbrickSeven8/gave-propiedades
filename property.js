@@ -132,7 +132,10 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
             <div>
               <div class="flex flex-wrap items-center gap-3 mb-4">
-                <span class="inline-block px-4 py-1.5 bg-gave-secondary text-white text-xs font-bold rounded-full uppercase tracking-widest shadow-sm">${property.status === 'Usado' ? 'En Venta' : 'Proyecto Nuevo'}</span>
+                <span class="inline-block px-4 py-1.5 ${property.status.toLowerCase() === 'vendida' ? 'bg-rose-600' : (property.status === 'Usado' ? 'bg-gave-secondary' : 'bg-gave-primary')} text-white text-xs font-bold rounded-full uppercase tracking-widest shadow-sm flex items-center gap-1.5">
+                  ${property.status.toLowerCase() === 'vendida' ? '<span class="w-2 h-2 rounded-full bg-white animate-pulse"></span>' : ''}
+                  ${property.status.toLowerCase() === 'vendida' ? 'Propiedad Vendida' : (property.status === 'Usado' ? 'En Venta' : 'Proyecto Nuevo')}
+                </span>
                 <span class="inline-block px-3 py-1 bg-gave-primary/10 text-gave-primary text-xs font-semibold rounded-full">${property.type}</span>
                 <span class="inline-block px-3 py-1 bg-gray-100 text-gray-600 text-xs font-semibold rounded-full">Ref: ${property.id}</span>
                 ${property.sector ? `<span class="inline-block px-3 py-1 bg-emerald-50 text-gave-secondary text-xs font-semibold rounded-full">Barrio ${property.sector}</span>` : ''}

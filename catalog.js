@@ -74,7 +74,18 @@ document.addEventListener('DOMContentLoaded', () => {
         if (resultsCount) resultsCount.textContent = `Mostrando ${props.length} inmueble${props.length > 1 ? 's' : ''}`;
 
         props.forEach(p => {
-            const statusColor = p.status.toLowerCase() === 'usado' ? 'bg-gave-secondary' : 'bg-gave-primary';
+            let statusColor = 'bg-gave-primary';
+            let statusLabel = p.status;
+            if (p.status.toLowerCase() === 'vendida' || p.status.toLowerCase() === 'vendido') {
+                statusColor = 'bg-rose-600';
+                statusLabel = 'Vendida';
+            } else if (p.status.toLowerCase() === 'usado') {
+                statusColor = 'bg-gave-secondary';
+                statusLabel = 'En Venta';
+            } else {
+                statusColor = 'bg-gave-primary';
+                statusLabel = 'Proyecto Nuevo';
+            }
             
             let specsHtml = '';
             if (p.type === 'Lote') {
@@ -93,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <div>
               <div class="relative h-60 overflow-hidden bg-gray-200">
                 <div class="absolute top-4 left-4 z-10 ${statusColor} text-white text-[10px] font-bold px-3 py-1.5 rounded-full uppercase tracking-wider shadow-md">
-                  ${p.status === 'Usado' ? 'En Venta' : 'Proyecto Nuevo'}
+                  ${statusLabel}
                 </div>
                 <div class="absolute top-4 right-4 z-10 bg-white/95 backdrop-blur-md text-gave-primary text-[10px] font-bold px-3 py-1.5 rounded-full uppercase tracking-wider shadow-sm">
                   ${p.type}
