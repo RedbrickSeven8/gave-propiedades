@@ -39,6 +39,15 @@ document.addEventListener('DOMContentLoaded', () => {
     
     if (!property) {
         mainContainer.innerHTML = `
+        <!-- Breadcrumbs y Navegación interna -->
+        <nav aria-label="Breadcrumb" class="container mx-auto px-4 pt-6 pb-2 text-xs font-semibold text-gray-500 flex items-center gap-2">
+            <a href="/" class="hover:text-gave-secondary transition-colors">Inicio</a>
+            <span>/</span>
+            <a href="/catalog.html" class="hover:text-gave-secondary transition-colors">Catálogo</a>
+            <span>/</span>
+            <span class="text-gave-primary font-bold line-clamp-1">${property.title}</span>
+        </nav>
+    
         <div class="container mx-auto px-4 py-20 text-center">
             <h1 class="text-3xl font-bold text-gave-primary mb-4">Propiedad no encontrada</h1>
             <p class="text-gray-500 mb-8">Lo sentimos, no pudimos encontrar la propiedad que buscas.</p>

@@ -14,7 +14,55 @@
     
     <!-- CSS -->
     <link rel="stylesheet" href="./style.css">
-  </head>
+  
+  <meta name="description" content="Gave Propiedades - Inmobiliaria en Pereira y Armenia. Encuentra casas, apartamentos y apartaestudios en venta. Asesoría integral y acompañamiento legal.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Gave Propiedades | Venta de Inmuebles en Pereira y Armenia">
+  <meta property="og:description" content="Encuentra tu propiedad ideal en Pereira y Armenia con Gave Propiedades. Casas en Condina, apartaestudios en Pinares y asesoría inmobiliaria garantizada.">
+  <meta property="og:image" content="https://gave-propiedades.surge.sh/properties/ref-003/foto_1.jpg">
+  <meta property="og:url" content="https://gave-propiedades.surge.sh/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Gave Propiedades | Venta de Inmuebles en Pereira y Armenia">
+  <meta name="twitter:description" content="Encuentra tu propiedad ideal en Pereira y Armenia con Gave Propiedades.">
+  <meta name="twitter:image" content="https://gave-propiedades.surge.sh/properties/ref-003/foto_1.jpg">
+
+
+  <!-- Marcado Schema Local (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "RealEstateAgent",
+    "name": "Gave Propiedades",
+    "image": "https://gave-propiedades.surge.sh/Logo.png",
+    "@id": "https://gave-propiedades.surge.sh",
+    "url": "https://gave-propiedades.surge.sh",
+    "telephone": "+573000000000",
+    "priceRange": "$$$",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Condina",
+      "addressLocality": "Pereira",
+      "addressRegion": "Risaralda",
+      "postalCode": "660001",
+      "addressCountry": "CO"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 4.7770,
+      "longitude": -75.6985
+    },
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
+      ],
+      "opens": "08:00",
+      "closes": "18:00"
+    }
+  }
+  </script>
+
+</head>
   <body class="antialiased font-sans text-gray-800 bg-gray-50 overflow-x-hidden w-full w-full">
     <!-- Navbar -->
     <header class="fixed top-0 w-full z-[9990] transition-all duration-300 bg-white shadow-md py-2" id="navbar">
@@ -565,13 +613,16 @@
             </div>
           </div>
         </div>
-        <div class="pt-8 border-t border-gray-800 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-500">
-          <p>&copy; 2024 Gave Propiedades. Todos los derechos reservados.</p>
-          <div class="flex gap-6">
-            <a href="#" class="hover:text-white transition-colors">Política de Privacidad</a>
-            <a href="#" class="hover:text-white transition-colors">Términos de Servicio</a>
+        
+        <div class="pt-8 border-t border-gray-800 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-400">
+          <p>&copy; 2026 Gave Propiedades. Responsable de la web: <strong>las paginas de dani</strong>.</p>
+          <div class="flex flex-wrap gap-4 text-xs">
+            <a href="/privacidad.html" class="hover:text-white transition-colors underline">Política de Privacidad</a>
+            <a href="/terminos.html" class="hover:text-white transition-colors underline">Términos y Condiciones</a>
+            <a href="/cookies.html" class="hover:text-white transition-colors underline">Política de Cookies</a>
           </div>
         </div>
+
       </div>
     </footer>
 
